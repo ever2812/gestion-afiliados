@@ -1,0 +1,61 @@
+    :root {
+      --app-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --bg-canvas: #f8fafc;
+      --border-subtle: #e2e8f0;
+      --primary-color: #0f172a;
+      --primary-accent: #2563eb;
+    }
+
+    body {
+      font-family: var(--app-font);
+      background-color: var(--bg-canvas);
+      color: #1e293b;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Minimalist card styling */
+    .card-modern {
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.875rem;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+    }
+
+    /* Drag & Drop Upload Zone */
+    .dropzone-container {
+      border: 2px dashed #cbd5e1;
+      border-radius: 0.75rem;
+      background-color: #fafbfc;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .dropzone-container:hover,
+    .dropzone-container.is-dragover {
+      border-color: var(--primary-accent);
+      background-color: #eff6ff;
+    }
+
+    /* Form Inputs */
+    .form-control-modern,
+    .form-select-modern {
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.5rem;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.925rem;
+      color: #1e293b;
+      background-color: #fff;
+    }
+    .form-control-modern:focus,
+    .form-select-modern:focus {
+      border-color: var(--primary-accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      outline: none;
+    }
+
+    .form-label-subtle {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #64748b;
+      margin-bottom: 0.25rem;
+    }
