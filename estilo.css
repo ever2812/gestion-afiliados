@@ -1,61 +1,80 @@
     :root {
       --app-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --bg-canvas: #f8fafc;
+      --bg-surface: #f8fafc;
       --border-subtle: #e2e8f0;
-      --primary-color: #0f172a;
-      --primary-accent: #2563eb;
+      --brand-primary: #0f172a;
+      --brand-accent: #2563eb;
     }
 
     body {
       font-family: var(--app-font);
-      background-color: var(--bg-canvas);
+      background-color: var(--bg-surface);
       color: #1e293b;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Minimalist card styling */
+    /* Minimal card aesthetic */
     .card-modern {
       background: #ffffff;
       border: 1px solid var(--border-subtle);
       border-radius: 0.875rem;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04);
     }
 
-    /* Drag & Drop Upload Zone */
+    /* Drag and drop styling */
     .dropzone-container {
       border: 2px dashed #cbd5e1;
       border-radius: 0.75rem;
       background-color: #fafbfc;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
     }
     .dropzone-container:hover,
     .dropzone-container.is-dragover {
-      border-color: var(--primary-accent);
+      border-color: var(--brand-accent);
       background-color: #eff6ff;
     }
 
-    /* Form Inputs */
+    /* Form controls */
     .form-control-modern,
     .form-select-modern {
       border: 1px solid var(--border-subtle);
       border-radius: 0.5rem;
-      padding: 0.65rem 0.85rem;
-      font-size: 0.925rem;
+      padding: 0.625rem 0.85rem;
+      font-size: 0.9rem;
       color: #1e293b;
-      background-color: #fff;
+      background-color: #ffffff;
     }
     .form-control-modern:focus,
     .form-select-modern:focus {
-      border-color: var(--primary-accent);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      border-color: var(--brand-accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
       outline: none;
     }
 
     .form-label-subtle {
-      font-size: 0.8rem;
-      font-weight: 500;
+      font-size: 0.785rem;
+      font-weight: 600;
       color: #64748b;
-      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+      margin-bottom: 0.35rem;
+      display: block;
+    }
+
+    /* Transition for results reveal */
+    .fade-slide-in {
+      animation: fadeInSlide 0.35s ease-out forwards;
+    }
+
+    @keyframes fadeInSlide {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }

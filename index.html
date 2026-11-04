@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Captura de Prospecto - Registro de Personas</title>
+  <title>Captura y Extracción de INE - ExtraerDatosDeINE</title>
   
   <!-- Bootstrap 5.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,56 +18,61 @@
 </head>
 <body class="pb-5">
 
-  <!-- Navbar Minimalista -->
-  <header class="bg-white border-bottom py-3 mb-4 sticky-top">
-    <div class="container d-flex align-items-center justify-content-between" style="max-width: 720px;">
+  <!-- Minimal Header -->
+  <header class="bg-white border-bottom py-3 mb-4 sticky-top shadow-sm">
+    <div class="container d-flex align-items-center justify-content-between" style="max-width: 760px;">
       <div class="d-flex align-items-center gap-2">
-        <div class="bg-dark text-white rounded-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
-          <i class="bi bi-person-badge"></i>
+        <div class="bg-dark text-white rounded-2 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">
+          <i class="bi bi-person-vcard fs-5"></i>
         </div>
-        <span class="fw-semibold text-dark fs-6 tracking-tight">Capturar Datos</span>
+        <div>
+          <span class="fw-bold text-dark fs-6 tracking-tight d-block lh-1">Captura de DAtos</span>
+          <span class="text-muted" style="font-size: 0.75rem;">Extraer datos de INE</span>
+        </div>
       </div>
-      <span class="badge bg-light text-secondary border fw-normal small px-2 py-1">Captura Continua</span>
+      
+
     </div>
   </header>
 
-  <main class="container" style="max-width: 720px;">
-    
+  <main class="container" style="max-width: 760px;">
+
+    <!-- Heading Intro -->
     <div class="mb-4">
-      <h1 class="h4 fw-bold text-dark mb-1">Registro de Datos</h1>
-      <p class="text-muted small mb-0">Selecciona el promotor, adjunta el documento de identificación.</p>
+      <h1 class="h4 fw-bold text-dark mb-1">Captura nuevo registro</h1>
+      <p class="text-muted small mb-0">Selecciona un promotor y adjunta la INE</p>
     </div>
 
-    <!-- Feedback Banner -->
-    <div id="statusMessage" class="alert d-none mb-3 py-2 px-3 rounded-3 small" role="alert"></div>
+    <!-- Alert / Status Notifications -->
+    <div id="statusMessage" class="alert d-none py-2 px-3 rounded-3 small mb-3 shadow-sm" role="alert"></div>
 
-    <form id="extractionForm" onsubmit="event.preventDefault(); processIneData();">
+    <form id="ineExtractionForm" onsubmit="event.preventDefault(); handleExtractData();">
       
-      <!-- CARD 1: Selección de Promotor -->
+      <!-- 1. SECCIÓN: PROMOTOR ASIGNADO -->
       <section class="card card-modern p-4 mb-3">
-        <h2 class="h6 fw-semibold text-dark mb-3 d-flex align-items-center gap-2">
-          <i class="bi bi-person text-primary"></i> Promotor Asignado
-        </h2>
-        <div>
-          <label for="promotorSelect" class="form-label-subtle">
-            Selecciona el promotor responsable <span class="text-danger">*</span>
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <label for="promotorSelect" class="form-label-subtle m-0">
+            <i class="bi bi-person-badge text-primary me-1"></i> 1. Promotor Asignado <span class="text-danger">*</span>
           </label>
-          <select class="form-select form-select-modern" id="promotorSelect" required>
-            <option value="" disabled selected>Selecciona un promotor...</option>
-            <option value="PM-0104">Carlos Mendoza (Zona Norte)</option>
-            <option value="PM-0219">Ana Sofía Ruiz (Zona Centro)</option>
-            <option value="PM-0345">Mauricio Lozano (Zona Poniente)</option>
-            <option value="PM-0412">Valeria Gómez (Zona Sur)</option>
-            <option value="PM-0087">Héctor Salgado (Ventas Remotas)</option>
-          </select>
         </div>
+        <select class="form-select form-select-modern" id="promotorSelect" required>
+          <option value="" disabled selected>Seleccione un promotor de la lista...</option>
+          <option value="Carlos Mendoza — Zona Norte (PM-0104)">Carlos Mendoza — Zona Norte (PM-0104)</option>
+          <option value="Ana Sofía Ruiz — Zona Centro (PM-0219)">Ana Sofía Ruiz — Zona Centro (PM-0219)</option>
+          <option value="Mauricio Lozano — Zona Poniente (PM-0345)">Mauricio Lozano — Zona Poniente (PM-0345)</option>
+          <option value="Valeria Gómez — Zona Sur (PM-0412)">Valeria Gómez — Zona Sur (PM-0412)</option>
+          <option value="Héctor Salgado — Ventas Remotas (PM-0087)">Héctor Salgado — Ventas Remotas (PM-0087)</option>
+        </select>
       </section>
 
-      <!-- CARD 2: Carga de Archivo de INE -->
+      <!-- 2. SECCIÓN: CARGA DE ARCHIVO DE INE -->
       <section class="card card-modern p-4 mb-3">
-        <h2 class="h6 fw-semibold text-dark mb-3 d-flex align-items-center gap-2">
-          <i class="bi bi-card-image text-primary"></i> Fotografía frontal de la INE
-        </h2>
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <label class="form-label-subtle m-0">
+            <i class="bi bi-card-image text-primary me-1"></i> 2. Fotografía Frontal de la INE <span class="text-danger">*</span>
+          </label>
+          <span class="text-muted small" style="font-size: 0.75rem;">JPG, PNG, WebP (Máx. 10MB)</span>
+        </div>
 
         <!-- Zona Drag & Drop -->
         <div id="dropZone" class="dropzone-container p-4 text-center">
@@ -77,23 +82,22 @@
             class="d-none" 
             accept="image/jpeg,image/png,image/webp,application/pdf"
           >
-          <div class="py-1">
+          <div class="py-2">
             <i class="bi bi-cloud-arrow-up fs-2 text-secondary mb-2 d-block"></i>
-            <p class="fw-medium text-dark small mb-1">Arrastra la fotografía de la INE aquí</p>
-            <p class="text-muted small mb-3" style="font-size: 0.8rem;">o presiona para explorar o tomar foto desde la cámara</p>
+            <p class="fw-semibold text-dark small mb-1">Arrastra la imagen del INE aquí</p>
+            <p class="text-muted small mb-3" style="font-size: 0.8rem;">o pulsa para examinar en tu dispositivo</p>
             <button type="button" class="btn btn-outline-secondary btn-sm px-3 rounded-2" onclick="triggerFileInput()">
-              <i class="bi bi-camera me-1"></i> Seleccionar archivo
+              <i class="bi bi-camera me-1"></i> Explorar Archivo
             </button>
-            <div class="text-muted mt-2" style="font-size: 0.75rem;">JPG, PNG o PDF (Máx. 8 MB)</div>
           </div>
         </div>
 
-        <!-- Vista Previa Compacta -->
+        <!-- Vista previa compacta -->
         <div id="filePreviewSection" class="p-3 bg-light border rounded-3 mt-3 d-none">
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-3 overflow-hidden">
-              <img id="previewImg" src="" alt="Vista previa" class="rounded border object-fit-cover d-none" style="width: 54px; height: 54px;">
-              <div id="previewPdfIcon" class="rounded bg-danger-subtle text-danger d-none align-items-center justify-content-center" style="width: 54px; height: 54px;">
+              <img id="previewImg" src="" alt="Vista previa" class="rounded border object-fit-cover d-none" style="width: 58px; height: 58px;">
+              <div id="previewPdfIcon" class="rounded bg-danger-subtle text-danger d-none align-items-center justify-content-center" style="width: 58px; height: 58px;">
                 <i class="bi bi-file-earmark-pdf fs-4"></i>
               </div>
               <div class="overflow-hidden">
@@ -101,64 +105,152 @@
                 <div class="text-muted small" id="fileSize">0 KB</div>
               </div>
             </div>
-            <button type="button" class="btn btn-sm btn-outline-danger border-0 rounded-circle" title="Quitar archivo" onclick="removeSelectedFile()">
+            <button type="button" class="btn btn-sm btn-outline-danger border-0 rounded-circle" title="Remover archivo" onclick="removeSelectedFile()">
               <i class="bi bi-x-lg"></i>
             </button>
           </div>
         </div>
       </section>
 
-      <!-- Botón de Procesamiento Principal -->
+      <!-- 3. SECCIÓN: CONFIGURACIÓN API (Colapsable / Opcional)
+      <section class="card card-modern p-3 mb-3">
+        <div class="d-flex align-items-center justify-content-between cursor-pointer" data-bs-toggle="collapse" data-bs-target="#apiConfigSection" aria-expanded="false" style="cursor: pointer;">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-key text-secondary"></i>
+            <span class="small fw-semibold text-dark">Configuración API (extraerdatosdeine.com)</span>
+          </div>
+          <span class="badge bg-light text-secondary border fw-normal" style="font-size: 0.75rem;">
+            Opciones <i class="bi bi-chevron-down ms-1"></i>
+          </span>
+        </div>
+
+        <div class="collapse pt-3" id="apiConfigSection">
+          <label for="apiKeyInput" class="form-label-subtle">API Key de extraerdatosdeine.com</label>
+          <div class="input-group input-group-sm mb-2">
+            <input type="password" id="apiKeyInput" class="form-control form-control-modern" placeholder="ine_xxxxxxxxxxxxxxx">
+            <button class="btn btn-outline-secondary" type="button" id="btnToggleApiKeyVisibility" onclick="toggleApiKeyVisibility()">
+              <i class="bi bi-eye" id="eyeIcon"></i>
+            </button>
+            <button class="btn btn-outline-secondary" type="button" onclick="saveApiKey()">Guardar</button>
+          </div>
+          <p class="text-muted mb-0" style="font-size: 0.75rem;">
+            La llave se envía vía cabecera <code>X-API-Key</code> al endpoint <code>https://extraerdatosdeine.com/api/v1/extract</code>. Si está vacía o activas "Modo Demo", se simulará la respuesta.
+          </p>
+        </div>
+      </section> -->
+
+      <!-- Botón de Extracción Principal -->
       <div class="d-grid mb-4">
         <button type="submit" id="btnProcess" class="btn btn-dark py-2 px-4 rounded-3 d-flex align-items-center justify-content-center gap-2">
           <i class="bi bi-cpu"></i>
-          <span>Procesar y Extraer Datos de INE</span>
+          <span id="btnProcessText">Escanear y Extraer Datos de INE</span>
         </button>
       </div>
     </form>
 
-    <!-- CARD 3: Resultados de Extracción (Oculto inicialmente) -->
-    <section id="resultsCard" class="card card-modern p-4 d-none">
-      <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
+    <!-- 4. SECCIÓN: RESULTADOS DE EXTRACCIÓN (Oculto inicialmente) -->
+    <section id="resultsCard" class="card card-modern p-4 d-none fade-slide-in">
+      <!-- <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom pb-3 mb-3 gap-2">
         <div>
-          <h2 class="h6 fw-semibold text-dark mb-0 d-flex align-items-center gap-2">
+          <h2 class="h6 fw-bold text-dark mb-1 d-flex align-items-center gap-2">
             <i class="bi bi-check2-circle text-success"></i> Datos Extraídos del Documento
           </h2>
-          <span class="text-muted small">Verifica y edita la información antes de guardar el registro</span>
+          <div class="d-flex align-items-center gap-2 mt-1">
+            <span class="badge bg-light text-secondary border fw-normal" id="assignedPromoterBadge">
+              <i class="bi bi-person me-1"></i> Sin promotor
+            </span>
+            <span class="badge bg-success-subtle text-success border border-success-subtle" id="badgeExtractionStatus">
+              OCR Verificado
+            </span>
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle d-none" id="tokensRemainingBadge">
+              Tokens restantes: 0
+            </span>
+          </div>
         </div>
-        <span class="badge bg-success-subtle text-success border border-success-subtle">OCR Completado</span>
-      </div>
+        
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="btn btn-outline-secondary btn-sm rounded-2 d-flex align-items-center gap-1" onclick="copyExtractedJSON()">
+            <i class="bi bi-clipboard"></i> <span>Copiar JSON</span>
+          </button>
+        </div>
+      </div> -->
 
+      <!-- Formulario con campos extraídos de la credencial -->
       <form id="extractedDataForm" onsubmit="event.preventDefault(); saveFinalRecord();">
         <div class="row g-3">
-          <div class="col-12">
-            <label class="form-label-subtle">Nombre Completo</label>
-            <input type="text" id="fieldNombre" class="form-control form-control-modern" required>
+          
+          <!-- Nombre(s) -->
+          <div class="col-md-4">
+            <label class="form-label-subtle">Nombre(s)</label>
+            <input type="text" id="resNombre" class="form-control form-control-modern" required>
           </div>
 
+          <!-- Apellido Paterno -->
+          <div class="col-md-4">
+            <label class="form-label-subtle">Primer Apellido (Paterno)</label>
+            <input type="text" id="resApellidoPaterno" class="form-control form-control-modern" required>
+          </div>
+
+          <!-- Apellido Materno -->
+          <div class="col-md-4">
+            <label class="form-label-subtle">Segundo Apellido (Materno)</label>
+            <input type="text" id="resApellidoMaterno" class="form-control form-control-modern">
+          </div>
+
+          <!-- CURP -->
           <div class="col-md-6">
             <label class="form-label-subtle">CURP</label>
-            <input type="text" id="fieldCurp" class="form-control form-control-modern font-monospace text-uppercase" maxlength="18" required>
+            <input type="text" id="resCurp" class="form-control form-control-modern font-monospace text-uppercase" maxlength="18" required>
+          </div>
+
+          <!-- Clave de Elector -->
+          <div class="col-md-6">
+            <label class="form-label-subtle">Clave de Elector</label>
+            <input type="text" id="resClaveElector" class="form-control form-control-modern font-monospace text-uppercase" maxlength="18" required>
+          </div>
+
+          <!-- Domicilio Completo -->
+          <!-- <div class="col-12">
+            <label class="form-label-subtle">Domicilio Completo</label>
+            <input type="text" id="resDomicilio" class="form-control form-control-modern" required>
+          </div> -->
+
+          <!-- Calle y Colonia -->
+          <div class="col-md-6">
+            <label class="form-label-subtle">Calle</label>
+            <input type="text" id="resCalle" class="form-control form-control-modern">
           </div>
 
           <div class="col-md-6">
-            <label class="form-label-subtle">Clave de Elector</label>
-            <input type="text" id="fieldClaveElector" class="form-control form-control-modern font-monospace text-uppercase" maxlength="18" required>
+            <label class="form-label-subtle">Colonia</label>
+            <input type="text" id="resColonia" class="form-control form-control-modern">
           </div>
 
-          <div class="col-12">
-            <label class="form-label-subtle">Domicilio Completo</label>
-            <textarea id="fieldDomicilio" class="form-control form-control-modern" rows="2" required></textarea>
+          <!-- Municipio, Estado y C.P. -->
+          <div class="col-md-5">
+            <label class="form-label-subtle">Municipio / Alcaldía</label>
+            <input type="text" id="resMunicipio" class="form-control form-control-modern">
           </div>
 
           <div class="col-md-4">
+            <label class="form-label-subtle">Estado</label>
+            <input type="text" id="resEstado" class="form-control form-control-modern">
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label-subtle">Código Postal</label>
+            <input type="text" id="resCodigoPostal" class="form-control form-control-modern font-monospace" maxlength="5">
+          </div>
+
+          <!-- Nacimiento, Sexo, Sección -->
+          <div class="col-md-4">
             <label class="form-label-subtle">Fecha de Nacimiento</label>
-            <input type="date" id="fieldNacimiento" class="form-control form-control-modern" required>
+            <input type="text" id="resFechaNacimiento" class="form-control form-control-modern" placeholder="DD/MM/AAAA">
           </div>
 
           <div class="col-md-4">
             <label class="form-label-subtle">Sexo</label>
-            <select id="fieldSexo" class="form-select form-select-modern" required>
+            <select id="resSexo" class="form-select form-select-modern">
               <option value="H">Hombre (H)</option>
               <option value="M">Mujer (M)</option>
               <option value="X">No Binario (X)</option>
@@ -166,33 +258,62 @@
           </div>
 
           <div class="col-md-4">
-            <label class="form-label-subtle">Vigencia INE</label>
-            <input type="text" id="fieldVigencia" class="form-control form-control-modern font-monospace" placeholder="Ej. 2024 - 2034" required>
+            <label class="form-label-subtle">Sección Electoral</label>
+            <input type="text" id="resSeccion" class="form-control form-control-modern font-monospace">
+          </div>
+
+          <!-- Vigencia, Emisión, Año Registro -->
+          <div class="col-md-4">
+            <label class="form-label-subtle">Vigencia</label>
+            <input type="text" id="resVigencia" class="form-control form-control-modern font-monospace">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label-subtle">Emisión</label>
+            <input type="text" id="resEmision" class="form-control form-control-modern font-monospace">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label-subtle">Año de Registro</label>
+            <input type="text" id="resAnioRegistro" class="form-control form-control-modern font-monospace">
+          </div>
+
+          <!-- Códigos OCR / CIC (opcional) -->
+          <div class="col-md-6">
+            <label class="form-label-subtle">Código OCR</label>
+            <input type="text" id="resOcr" class="form-control form-control-modern font-monospace small">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label-subtle">CIC</label>
+            <input type="text" id="resCic" class="form-control form-control-modern font-monospace small">
           </div>
         </div>
 
-        <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-4 pt-3 border-top">
           <button type="button" class="btn btn-outline-secondary rounded-2 btn-sm px-3" onclick="resetAll()">
-            Nueva Captura
+            <i class="bi bi-arrow-counterclockwise me-1"></i> Limpiar / Escanear otra INE
           </button>
           <button type="submit" id="btnSaveRecord" class="btn btn-primary rounded-2 btn-sm px-4 d-flex align-items-center gap-2">
-            <i class="bi bi-cloud-check"></i>
-            <span>Confirmar y Guardar Registro</span>
+            <i class="bi bi-cloud-arrow-up"></i>
+            <span>Guardar Registro</span>
           </button>
         </div>
       </form>
     </section>
 
-    <!-- Footer sencillo -->
+    <!-- Footer -->
     <footer class="text-center text-muted small mt-5 pt-3">
-      CapturaINE &copy; 2026 &mdash; Procesamiento Digital de Identificaciones
+      Integración con <a href="https://extraerdatosdeine.com" target="_blank" rel="noopener noreferrer" class="text-secondary text-decoration-none fw-semibold">extraerdatosdeine.com</a> &mdash; Endpoint <code>/api/v1/extract</code>
     </footer>
   </main>
 
   <!-- Bootstrap Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="get-api.js"></script>
 
   <script>
+    // DOM Elements
     const promotorSelect = document.getElementById('promotorSelect');
     const dropZone = document.getElementById('dropZone');
     const ineFileInput = document.getElementById('ineFileInput');
@@ -203,26 +324,41 @@
     const fileSize = document.getElementById('fileSize');
     const statusMessage = document.getElementById('statusMessage');
     const btnProcess = document.getElementById('btnProcess');
+    const btnProcessText = document.getElementById('btnProcessText');
     const resultsCard = document.getElementById('resultsCard');
+    const apiKeyInput = document.getElementById('apiKeyInput');
+    // const demoModeToggle = document.getElementById('demoModeToggle');
+    // const assignedPromoterBadge = document.getElementById('assignedPromoterBadge');
+    // const tokensRemainingBadge = document.getElementById('tokensRemainingBadge');
 
     let currentFile = null;
+    let latestExtractedData = null;
 
-    // Disparar selector de archivos
+
+
+    function toggleApiKeyVisibility() {
+      const isPassword = apiKeyInput.type === 'password';
+      apiKeyInput.type = isPassword ? 'text' : 'password';
+      const icon = document.getElementById('eyeIcon');
+      icon.className = isPassword ? 'bi bi-eye-slash' : 'bi bi-eye';
+    }
+
+    // Trigger file dialog
     function triggerFileInput() {
       ineFileInput.click();
     }
 
-    // Drag and Drop
-    ['dragenter', 'dragover'].forEach(eventName => {
-      dropZone.addEventListener(eventName, (e) => {
+    // Drag & Drop handlers
+    ['dragenter', 'dragover'].forEach(name => {
+      dropZone.addEventListener(name, (e) => {
         e.preventDefault();
         e.stopPropagation();
         dropZone.classList.add('is-dragover');
       });
     });
 
-    ['dragleave', 'drop'].forEach(eventName => {
-      dropZone.addEventListener(eventName, (e) => {
+    ['dragleave', 'drop'].forEach(name => {
+      dropZone.addEventListener(name, (e) => {
         e.preventDefault();
         e.stopPropagation();
         dropZone.classList.remove('is-dragover');
@@ -232,7 +368,7 @@
     dropZone.addEventListener('drop', (e) => {
       const files = e.dataTransfer.files;
       if (files && files.length > 0) {
-        processFile(files[0]);
+        processSelectedFile(files[0]);
       }
     });
 
@@ -244,19 +380,19 @@
 
     ineFileInput.addEventListener('change', (e) => {
       if (e.target.files && e.target.files[0]) {
-        processFile(e.target.files[0]);
+        processSelectedFile(e.target.files[0]);
       }
     });
 
-    function processFile(file) {
+    function processSelectedFile(file) {
       const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
       if (!validTypes.includes(file.type)) {
-        showStatus('Formato no soportado. Sube una imagen (JPG, PNG) o PDF.', 'danger');
+        showStatus('Formato no soportado. Proporciona una imagen JPEG, PNG, WebP o documento PDF.', 'danger');
         return;
       }
 
-      if (file.size > 8 * 1024 * 1024) {
-        showStatus('El archivo excede el tamaño máximo permitido de 8 MB.', 'danger');
+      if (file.size > 10 * 1024 * 1024) {
+        showStatus('El archivo excede el límite máximo de 10 MB.', 'danger');
         return;
       }
 
@@ -290,80 +426,239 @@
       filePreviewSection.classList.add('d-none');
     }
 
-    // Simulación de llamada a API de OCR
-    function processIneData() {
-      if (!promotorSelect.value) {
-        showStatus('Debes seleccionar un promotor antes de continuar.', 'warning');
+    // Main Extraction Handler
+    async function handleExtractData() {
+      const selectedPromoter = promotorSelect.value;
+      if (!selectedPromoter) {
+        showStatus('Selecciona un promotor antes de realizar la extracción.', 'warning');
         promotorSelect.focus();
         return;
       }
 
       if (!currentFile) {
-        showStatus('Por favor adjunta o toma una foto del INE para procesar.', 'warning');
+        showStatus('Adjunta la fotografía del INE a procesar.', 'warning');
         dropZone.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
       }
 
-      // Estado de carga
-      btnProcess.disabled = true;
-      btnProcess.innerHTML = `
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        <span>Extrayendo información vía OCR...</span>
-      `;
+    
+
+      // UI: Loading State
+      setLoadingState(true);
       hideStatus();
 
-      // Simulación de respuesta de API de extracción
-      setTimeout(() => {
-        btnProcess.disabled = false;
-        btnProcess.innerHTML = `
-          <i class="bi bi-cpu"></i>
-          <span>Procesar y Extraer Datos de INE</span>
-        `;
+      try {
+        let responseData;
 
-        // Datos simulados extraídos por la API
-        document.getElementById('fieldNombre').value = 'RODRÍGUEZ HERNÁNDEZ MARÍA ELENA';
-        document.getElementById('fieldCurp').value = 'ROHM880415MDFRRN09';
-        document.getElementById('fieldClaveElector').value = 'RDHEMR88041509M200';
-        document.getElementById('fieldDomicilio').value = 'AV. INSURGENTES SUR 1602, CRÉDITO CONSTRUCTOR, BENITO JUÁREZ, CIUDAD DE MÉXICO, C.P. 03940';
-        document.getElementById('fieldNacimiento').value = '1988-04-15';
-        document.getElementById('fieldSexo').value = 'M';
-        document.getElementById('fieldVigencia').value = '2022 - 2032';
+        if (0>1) {
+          // Mocking the exact JSON structure of extraerdatosdeine.com /api/v1/extract
+          await new Promise(resolve => setTimeout(resolve, 1400));
+          responseData = {
+            success: true,
+            extraction_id: "demo_" + Math.random().toString(36).substring(2, 10),
+            data: {
+              nombre: "MARÍA ELENA",
+              apellidoPaterno: "RODRÍGUEZ",
+              apellidoMaterno: "HERNÁNDEZ",
+              curp: "ROHM880415MDFRRN09",
+              claveElector: "RDHEMR88041509M200",
+              fechaNacimiento: "15/04/1988",
+              sexo: "M",
+              domicilio: "AV. INSURGENTES SUR 1602, CRÉDITO CONSTRUCTOR, BENITO JUÁREZ, CIUDAD DE MÉXICO, C.P. 03940",
+              calle: "AV. INSURGENTES SUR 1602",
+              colonia: "CRÉDITO CONSTRUCTOR",
+              codigoPostal: "03940",
+              municipio: "BENITO JUÁREZ",
+              estado: "CIUDAD DE MÉXICO",
+              seccion: "4321",
+              vigencia: "2024-2034",
+              emision: "02",
+              anioRegistro: "2006",
+              ocr: "0943210123456",
+              cic: "194857201"
+            },
+            tokens_remaining: 18,
+            upload_method: "multipart"
+          };
+          showStatus('Modo Demo: Datos simulados con éxito (conforme al formato de extraerdatosdeine.com).', 'info');
 
-        // Mostrar sección de resultados con scroll suave
-        resultsCard.classList.remove('d-none');
-        resultsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+   
+   
+            // Real API call via FormData (Multipart Form-Data)
+          const formData = new FormData();
+            formData.append('image_front', currentFile);
+            const response = await fetch('./getApi/index.php', {
+                    method: 'POST',
+                    body: formData
+                    });
 
-        showStatus('Datos extraídos exitosamente. Revisa y confirma la información.', 'success');
-      }, 1500);
+          const json = await response.json().catch(() => null);
+
+          if (!response.ok) {
+            let errorMsg = `Error ${response.status}: `;
+            if (json && json.message) {
+              errorMsg += json.message;
+            } else if (response.status === 401) {
+              errorMsg += 'API Key inválida o no proporcionada en extraerdatosdeine.com';
+            } else if (response.status === 402) {
+              errorMsg += 'Saldo de tokens insuficiente en tu cuenta.';
+            } else if (response.status === 429) {
+              errorMsg += 'Límite de peticiones alcanzado. Intenta de nuevo en un momento.';
+            } else {
+              errorMsg += 'No se pudo procesar la imagen del INE.';
+            }
+            throw new Error(errorMsg);
+          }
+
+          responseData = json;
+          showStatus('¡Datos de INE extraídos con éxito desde la API!', 'success');
+        }
+
+        if (responseData && responseData.data) {
+          populateResults(responseData.data, selectedPromoter, responseData.tokens_remaining);
+        } else {
+          throw new Error('La API respondió pero no contenía datos legibles.');
+        }
+
+      } catch (error) {
+        showStatus(error.message || 'Error de conexión con el servicio de OCR.', 'danger');
+      } finally {
+        setLoadingState(false);
+      }
     }
 
-    // Confirmación final
+    function populateResults(data, promoter, tokens) {
+      latestExtractedData = {
+        promotor: promoter,
+        timestamp: new Date().toISOString(),
+        ...data
+      };
+
+      // Populate text inputs
+      document.getElementById('resNombre').value = data.nombre || '';
+      document.getElementById('resApellidoPaterno').value = data.apellidoPaterno || '';
+      document.getElementById('resApellidoMaterno').value = data.apellidoMaterno || '';
+      document.getElementById('resCurp').value = data.curp || '';
+      document.getElementById('resClaveElector').value = data.claveElector || '';
+    //document.getElementById('resDomicilio').value = data.domicilio || '';
+      document.getElementById('resCalle').value = data.calle || '';
+      document.getElementById('resColonia').value = data.colonia || '';
+      document.getElementById('resMunicipio').value = data.municipio || '';
+      document.getElementById('resEstado').value = data.estado || '';
+      document.getElementById('resCodigoPostal').value = data.codigoPostal || '';
+      document.getElementById('resFechaNacimiento').value = data.fechaNacimiento || '';
+      
+      const sexoSelect = document.getElementById('resSexo');
+      if (data.sexo && ['H', 'M', 'X'].includes(data.sexo.toUpperCase())) {
+        sexoSelect.value = data.sexo.toUpperCase();
+      }
+
+      document.getElementById('resSeccion').value = data.seccion || '';
+      document.getElementById('resVigencia').value = data.vigencia || '';
+      document.getElementById('resEmision').value = data.emision || '';
+      document.getElementById('resAnioRegistro').value = data.anioRegistro || '';
+    //   document.getElementById('resOcr').value = data.ocr || '';
+    //   document.getElementById('resCic').value = data.cic || '';
+
+    // Update badges
+    // assignedPromoterBadge.innerHTML = `<i class="bi bi-person me-1"></i> ${promoter}`;
+
+    //   if (typeof tokens !== 'undefined') {
+    //     tokensRemainingBadge.textContent = `Tokens restantes: ${tokens}`;
+    //     tokensRemainingBadge.classList.remove('d-none');
+    //   } else {
+    //     tokensRemainingBadge.classList.add('d-none');
+    //   }
+
+      // Show results
+      resultsCard.classList.remove('d-none');
+      resultsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function setLoadingState(isLoading) {
+      btnProcess.disabled = isLoading;
+      if (isLoading) {
+        btnProcess.innerHTML = `
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span>Extrayendo datos....</span>
+        `;
+      } else {
+        btnProcess.innerHTML = `
+          <i class="bi bi-cpu"></i>
+          <span id="btnProcessText">Escanear y Extraer Datos de INE</span>
+        `;
+      }
+    }
+
+    function copyExtractedJSON() {
+      if (!latestExtractedData) return;
+      
+      // Update data with current edited inputs
+      const currentSnapshot = {
+        ...latestExtractedData,
+        nombre: document.getElementById('resNombre').value,
+        apellidoPaterno: document.getElementById('resApellidoPaterno').value,
+        apellidoMaterno: document.getElementById('resApellidoMaterno').value,
+        curp: document.getElementById('resCurp').value,
+        claveElector: document.getElementById('resClaveElector').value,
+        domicilio: document.getElementById('resDomicilio').value,
+        calle: document.getElementById('resCalle').value,
+        colonia: document.getElementById('resColonia').value,
+        municipio: document.getElementById('resMunicipio').value,
+        estado: document.getElementById('resEstado').value,
+        codigoPostal: document.getElementById('resCodigoPostal').value,
+        fechaNacimiento: document.getElementById('resFechaNacimiento').value,
+        sexo: document.getElementById('resSexo').value,
+        seccion: document.getElementById('resSeccion').value,
+        vigencia: document.getElementById('resVigencia').value,
+        emision: document.getElementById('resEmision').value,
+        anioRegistro: document.getElementById('resAnioRegistro').value,
+        // ocr: document.getElementById('resOcr').value,
+        // cic: document.getElementById('resCic').value
+      };
+
+      const jsonStr = JSON.stringify(currentSnapshot, null, 2);
+
+      // Robust copy method for iframe compatibility
+      const dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = jsonStr;
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+
+      showStatus('Datos copiados al portapapeles en formato JSON.', 'success');
+    }
+
     function saveFinalRecord() {
       const btnSave = document.getElementById('btnSaveRecord');
       btnSave.disabled = true;
       btnSave.innerHTML = `
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        Guardando...
+        <span>Guardando...</span>
       `;
 
       setTimeout(() => {
         btnSave.disabled = false;
-        btnSave.innerHTML = `<i class="bi bi-cloud-check"></i> <span>Confirmar y Guardar Registro</span>`;
-        showStatus(`¡Registro de ${document.getElementById('fieldNombre').value} guardado con éxito!`, 'success');
-      }, 900);
+        btnSave.innerHTML = `<i class="bi bi-cloud-arrow-up"></i> <span>Guardar Registro</span>`;
+        const nombreCompleto = `${document.getElementById('resNombre').value} ${document.getElementById('resApellidoPaterno').value}`;
+        showStatus(`¡Registro de ${nombreCompleto || 'la persona'} guardado correctamente!`, 'success');
+      }, 800);
     }
 
     function resetAll() {
-      document.getElementById('extractionForm').reset();
+      document.getElementById('ineExtractionForm').reset();
       document.getElementById('extractedDataForm').reset();
       removeSelectedFile();
       resultsCard.classList.add('d-none');
+      latestExtractedData = null;
       hideStatus();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function showStatus(text, variant = 'info') {
-      statusMessage.className = `alert alert-${variant} border mb-3 py-2 px-3 rounded-3 small`;
+      statusMessage.className = `alert alert-${variant} border py-2 px-3 rounded-3 small mb-3 shadow-sm`;
       statusMessage.textContent = text;
       statusMessage.classList.remove('d-none');
     }
