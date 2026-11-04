@@ -38,10 +38,10 @@
   <main class="container" style="max-width: 760px;">
 
     <!-- Heading Intro -->
-    <div class="mb-4">
+    <!-- <div class="mb-4">
       <h1 class="h4 fw-bold text-dark mb-1">Captura nuevo registro</h1>
       <p class="text-muted small mb-0">Selecciona un promotor y adjunta la INE</p>
-    </div>
+    </div> -->
 
     <!-- Alert / Status Notifications -->
     <div id="statusMessage" class="alert d-none py-2 px-3 rounded-3 small mb-3 shadow-sm" role="alert"></div>
@@ -52,16 +52,16 @@
       <section class="card card-modern p-4 mb-3">
         <div class="d-flex align-items-center justify-content-between mb-2">
           <label for="promotorSelect" class="form-label-subtle m-0">
-            <i class="bi bi-person-badge text-primary me-1"></i> 1. Promotor Asignado <span class="text-danger">*</span>
+            <i class="bi bi-person-badge text-primary me-1"></i> 1. Promotor<span class="text-danger">*</span>
           </label>
         </div>
         <select class="form-select form-select-modern" id="promotorSelect" required>
-          <option value="" disabled selected>Seleccione un promotor de la lista...</option>
-          <option value="Carlos Mendoza — Zona Norte (PM-0104)">Carlos Mendoza — Zona Norte (PM-0104)</option>
-          <option value="Ana Sofía Ruiz — Zona Centro (PM-0219)">Ana Sofía Ruiz — Zona Centro (PM-0219)</option>
-          <option value="Mauricio Lozano — Zona Poniente (PM-0345)">Mauricio Lozano — Zona Poniente (PM-0345)</option>
-          <option value="Valeria Gómez — Zona Sur (PM-0412)">Valeria Gómez — Zona Sur (PM-0412)</option>
-          <option value="Héctor Salgado — Ventas Remotas (PM-0087)">Héctor Salgado — Ventas Remotas (PM-0087)</option>
+          <option value="" disabled selected>Seleccione un promotor...</option>
+          <option value="Carlos Mendoza — Zona Norte (PM-0104)">Carlos Mendoza - Barrio 1</option>
+          <option value="Ana Sofía Ruiz — Zona Centro (PM-0219)">Ana Sofía Ruiz — Barrio 2</option>
+          <option value="Mauricio Lozano — Zona Poniente (PM-0345)">Mauricio Lozano — Barrio 3</option>
+          <option value="Valeria Gómez — Zona Sur (PM-0412)">Valeria Gómez — Zona Sur</option>
+          <option value="Héctor Salgado — Ventas Remotas (PM-0087)">Héctor Salgado — Ventas Remotas</option>
         </select>
       </section>
 
@@ -304,7 +304,9 @@
 
     <!-- Footer -->
     <footer class="text-center text-muted small mt-5 pt-3">
-      Integración con https://extraerdatosdeine.com @ever2812</footer>
+      Extracción de Datos INE - @ever2812
+        <!-- Integración con https://extraerdatosdeine.com @ever2812 -->
+    </footer>
   </main>
 
   <!-- Bootstrap Bundle JS -->
