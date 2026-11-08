@@ -26,7 +26,7 @@
           <i class="bi bi-person-vcard fs-5"></i>
         </div>
         <div>
-          <span class="fw-bold text-dark fs-6 tracking-tight d-block lh-1">Captura de Afiliados</span>
+          <span class="fw-bold text-dark fs-6 tracking-tight d-block lh-1">Gestion de Afiliados</span>
           <span class="text-muted" style="font-size: 0.75rem;">Extraer datos de INE</span>
         </div>
       </div>
@@ -117,7 +117,7 @@
       <div class="d-grid mb-4">
         <button type="submit" id="btnProcess" class="btn btn-dark py-2 px-4 rounded-3 d-flex align-items-center justify-content-center gap-2">
           <i class="bi bi-cpu"></i>
-          <span id="btnProcessText">Extraer Datos de INE</span>
+          <span id="btnProcessText">Extraer Información</span>
         </button>
       </div>
     </form>
@@ -254,7 +254,7 @@
 
     <!-- Footer -->
     <footer class="text-center text-muted small mt-5 pt-3">
-      Extracción de Datos INE - @ever2812
+      Gestion de Afiliados - @ever2812
         <!-- Integración con https://extraerdatosdeine.com @ever2812 -->
     </footer>
   </main>
