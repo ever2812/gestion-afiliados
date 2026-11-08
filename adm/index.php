@@ -18,22 +18,108 @@
 </head>
 <body class="pb-5">
 
-  <!-- Minimal Header -->
-  <header class="bg-white border-bottom py-3 mb-4 sticky-top shadow-sm">
-    <div class="container d-flex align-items-center justify-content-between" style="max-width: 760px;">
-      <div class="d-flex align-items-center gap-2">
-        <div class="bg-dark text-white rounded-2 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">
-          <i class="bi bi-person-vcard fs-5"></i>
-        </div>
-        <div>
-          <span class="fw-bold text-dark fs-6 tracking-tight d-block lh-1">Gestion de Afiliados</span>
-          <span class="text-muted" style="font-size: 0.75rem;">Extraer datos de INE</span>
-        </div>
+<!-- Minimal Header con Menú de Navegación -->
+<header class="bg-white border-bottom py-2 py-md-3 mb-4 sticky-top shadow-sm">
+  <div class="container d-flex align-items-center justify-content-between" style="max-width: 760px;">
+    
+    <!-- Identidad / Logo -->
+    <a href="./index.php" class="d-flex align-items-center gap-2 text-decoration-none">
+      <div class="bg-dark text-white rounded-2 d-flex align-items-center justify-content-center shadow-sm" style="width: 36px; height: 36px;">
+        <i class="bi bi-person-vcard fs-5"></i>
       </div>
+      <div>
+        <span class="fw-bold text-dark fs-6 tracking-tight d-block lh-1">Gestión de Afiliados</span>
+        <span class="text-muted" style="font-size: 0.75rem;">Extraer datos de INE</span>
+      </div>
+    </a>
+
+    <!-- Botón Hamburguesa / Menú -->
+    <button 
+      class="btn btn-light border-0 rounded-2 p-2 text-dark d-flex align-items-center justify-content-center" 
+      type="button" 
+      data-bs-toggle="offcanvas" 
+      data-bs-target="#navMenuOffcanvas" 
+      aria-controls="navMenuOffcanvas"
+      aria-label="Abrir menú de navegación"
+      style="width: 38px; height: 38px;"
+    >
+      <i class="bi bi-list fs-4 lh-1"></i>
+    </button>
+
+  </div>
+</header>
+
+<!-- Menú Lateral Deslizante (Offcanvas) -->
+<div class="offcanvas offcanvas-end border-0 shadow" tabindex="-1" id="navMenuOffcanvas" aria-labelledby="navMenuLabel" style="max-width: 300px;">
+  
+  <!-- Encabezado del Menú -->
+  <div class="offcanvas-header border-bottom py-3">
+    <div class="d-flex align-items-center gap-2">
+      <div class="bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+        <i class="bi bi-grid-fill fs-6"></i>
+      </div>
+      <h6 class="offcanvas-title fw-bold text-dark mb-0" id="navMenuLabel">Navegación</h6>
+    </div>
+    <button type="button" class="btn-close text-reset shadow-none" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+  </div>
+
+  <!-- Cuerpo con Enlaces -->
+  <div class="offcanvas-body d-flex flex-column justify-content-between p-3">
+    <div class="list-group list-group-flush border-0">
       
+      <!-- Opción: Captura de INE (Activa en la pantalla actual) -->
+      <a href="./index.php" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 bg-light text-dark fw-semibold">
+        <i class="bi bi-camera-fill text-primary fs-5"></i>
+        <div>
+          <span class="d-block lh-1">Captura INE</span>
+          <small class="text-muted fw-normal" style="font-size: 0.75rem;">Escanear y afiliar</small>
+        </div>
+      </a>
+
+      <!-- Opción: Mini Dashboard / Estadísticas -->
+      <a href="./dashboard.php" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
+        <i class="bi bi-bar-chart-line-fill text-muted fs-5"></i>
+        <div>
+          <span class="d-block lh-1 text-dark fw-medium">Dashboard</span>
+          <small class="text-muted" style="font-size: 0.75rem;">Resultados y métricas</small>
+        </div>
+      </a>
+
+      <!-- Opción: Listado de Afiliados Capturados -->
+      <a href="./afiliados.php" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
+        <i class="bi bi-people-fill text-muted fs-5"></i>
+        <div>
+          <span class="d-block lh-1 text-dark fw-medium">Afiliados</span>
+          <small class="text-muted" style="font-size: 0.75rem;">Consulta de registros</small>
+        </div>
+      </a>
 
     </div>
-  </header>
+
+    <!-- Sección Inferior: Usuario & Logout -->
+    <div class="pt-3 border-top mt-auto">
+      <div class="d-flex align-items-center justify-content-between mb-3 px-1">
+        <div class="d-flex align-items-center gap-2 overflow-hidden">
+          <div class="bg-secondary-subtle text-secondary rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; min-width: 32px;">
+            <i class="bi bi-person-fill"></i>
+          </div>
+          <div class="text-truncate">
+            <div class="small fw-bold text-dark text-truncate">
+              <?php echo htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Promotor'); ?>
+            </div>
+            <div class="text-muted text-truncate" style="font-size: 0.7rem;">Sesión activa</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="../logout.php" class="btn btn-outline-danger w-100 rounded-2 btn-sm d-flex align-items-center justify-content-center gap-2 py-2">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Cerrar Sesión</span>
+      </a>
+    </div>
+
+  </div>
+</div>
 
   <main class="container" style="max-width: 760px;">
 
