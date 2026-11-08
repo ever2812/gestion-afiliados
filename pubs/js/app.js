@@ -38,7 +38,7 @@
       try {
         /*
           // Ejemplo de integración con tu backend local o API:
-          const response = await fetch('./login.php', {
+          const response = await fetch('./api-login/index.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })

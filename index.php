@@ -101,14 +101,14 @@
         </div>
 
         <!-- Recordar sesión -->
-        <div class="d-flex align-items-center justify-content-between mb-4">
+        <!-- <div class="d-flex align-items-center justify-content-between mb-4">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="rememberMe">
             <label class="form-check-label text-muted small" for="rememberMe" style="font-size: 0.8rem;">
               Mantener sesión iniciada
             </label>
           </div>
-        </div>
+        </div> -->
 
         <!-- Botón de Ingreso con Feedback de Carga -->
         <div class="d-grid">
@@ -121,7 +121,6 @@
             </div>
           </button>
         </div>
-
       </form>
     </section>
 
@@ -133,9 +132,6 @@
 
   <!-- Bootstrap Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
   <script src="./pubs/js/app.js"></script>
-
 </body>
-
 </html>

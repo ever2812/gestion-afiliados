@@ -174,7 +174,7 @@
             // Real API call via FormData (Multipart Form-Data)
           const formData = new FormData();
             formData.append('image_front', currentFile);
-            const response = await fetch('./getApi/index.php', {
+            const response = await fetch('./api/extract/index.php', {
                     method: 'POST',
                     body: formData
                     });
