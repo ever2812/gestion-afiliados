@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $rawInput = file_get_contents('php://input');
 $data = json_decode($rawInput, true);
 
-$username = trim($data['username'] ?? '');
+$username = trim($data['user'] ?? '');
 $password = trim($data['pswd'] ?? '');
 
 if ($username === '' || $password === '') {

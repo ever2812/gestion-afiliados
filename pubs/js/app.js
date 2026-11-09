@@ -1,7 +1,7 @@
   //-- Lógica básica de Login y accesibilidad móvil -- //   
     
     function togglePasswordVisibility() {
-      const passwordInput = document.getElementById('passwordInput');
+      const passwordInput = document.getElementById('pswdInput');
       const eyeIcon = document.getElementById('passwordEyeIcon');
 
       if (passwordInput.type === 'password') {
@@ -14,8 +14,8 @@
     }
 
 async function handleLogin() {
-  const username = document.getElementById('usernameInput').value.trim();
-  const password = document.getElementById('passwordInput').value.trim();
+  const user = document.getElementById('usrInput').value.trim();
+  const pswd = document.getElementById('pswdInput').value.trim();
   const alertBox = document.getElementById('loginAlert');
   const alertText = document.getElementById('loginAlertText');
   const btnSubmit = document.getElementById('btnLoginSubmit');
@@ -24,7 +24,7 @@ async function handleLogin() {
 
   alertBox.classList.add('d-none');
 
-  if (!username || !password) {
+  if (!user || !pswd) {
     alertText.textContent = 'Por favor completa todos los campos requeridos.';
     alertBox.classList.remove('d-none');
     return;
@@ -40,7 +40,7 @@ async function handleLogin() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ user, pswd })
     });
 
     const result = await response.json();
@@ -57,7 +57,7 @@ async function handleLogin() {
     alertBox.classList.remove('d-none');
   } finally {
     btnSubmit.disabled = false;
-    btnText.textContent = 'Ingresar al Sistema';
+    btnText.textContent = 'Ingresar';
     btnSpinner.classList.add('d-none');
   }
 }

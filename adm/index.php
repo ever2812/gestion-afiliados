@@ -24,11 +24,11 @@
 
 <!-- Minimal Header con Menú de Navegación -->
 <header class="bg-white border-bottom py-2 py-md-3 mb-4 sticky-top shadow-sm">
-  <div class="container d-flex align-items-center justify-content-between" style="max-width: 760px;">
+<div class="container-fluid px-3 px-md-4 d-flex align-items-center justify-content-between">
     
-    <!-- Identidad / Logo -->
+    <!-- Extremo Izquierdo: Identidad / Logo -->
     <a href="./index.php" class="d-flex align-items-center gap-2 text-decoration-none">
-      <div class="bg-dark text-white rounded-2 d-flex align-items-center justify-content-center shadow-sm" style="width: 36px; height: 36px;">
+      <div class="bg-dark text-white rounded-2 d-flex align-items-center justify-content-center shadow-sm" style="width: 36px; height: 36px; min-width: 36px;">
         <i class="bi bi-person-vcard fs-5"></i>
       </div>
       <div>
@@ -116,7 +116,7 @@
         </div>
       </div>
 
-      <a href="../logout.php" class="btn btn-outline-danger w-100 rounded-2 btn-sm d-flex align-items-center justify-content-center gap-2 py-2">
+      <a href="api/session/end.php" class="btn btn-outline-danger w-100 rounded-2 btn-sm d-flex align-items-center justify-content-center gap-2 py-2">
         <i class="bi bi-box-arrow-right"></i>
         <span>Cerrar Sesión</span>
       </a>

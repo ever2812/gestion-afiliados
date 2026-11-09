@@ -74,7 +74,7 @@
             <span class="input-group-text bg-white border-end-0 text-muted">
               <i class="bi bi-person-badge"></i>
             </span>
-            <input type="text" id="usernameInput"
+            <input type="text" id="usrInput"
               class="form-control form-control-modern border-start-0 ps-0"
               placeholder="usuario@correo.com" autocomplete="username" autocapitalize="none" required>
           </div>
@@ -93,7 +93,7 @@
             <span class="input-group-text bg-white border-end-0 text-muted">
               <i class="bi bi-lock"></i>
             </span>
-            <input type="password" id="passwordInput"
+            <input type="password" id="pswdInput"
               class="form-control form-control-modern border-start-0 border-end-0 px-0"
               placeholder="••••••••" autocomplete="current-password" required>
             <button type="button" class="btn btn-password-toggle px-3 shadow-none" id="btnTogglePassword"
