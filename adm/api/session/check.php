@@ -4,7 +4,7 @@ session_start();
 
 if (empty($_SESSION['usuario_autenticado'])) {
     // Si no hay sesión activa, redirige al login
-    header('Location: ../login.html');
+    header('Location: ../');
     exit;
 }
 
@@ -12,19 +12,8 @@ if (empty($_SESSION['usuario_autenticado'])) {
 if (isset($_SESSION['ultimo_acceso']) && (time() - $_SESSION['ultimo_acceso'] > 1800)) {
     session_unset();
     session_destroy();
-    header('Location: ../login.html?expirada=1');
+    header('Location: ../');
     exit;
 }
 $_SESSION['ultimo_acceso'] = time();
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Panel de Administración</title>
-</head>
-<body>
-  <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre'] ?? ''); ?></h1>
-  <a href="../logout.php">Cerrar Sesión</a>
-</body>
-</html>

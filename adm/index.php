@@ -1,3 +1,7 @@
+<?php
+  include 'api/session/check.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

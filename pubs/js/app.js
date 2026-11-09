@@ -13,52 +13,51 @@
       }
     }
 
-    async function handleLogin() {
-      const username = document.getElementById('usernameInput').value.trim();
-      const password = document.getElementById('passwordInput').value.trim();
-      const alertBox = document.getElementById('loginAlert');
-      const alertText = document.getElementById('loginAlertText');
-      const btnSubmit = document.getElementById('btnLoginSubmit');
-      const btnText = document.getElementById('btnLoginText');
-      const btnSpinner = document.getElementById('btnLoginSpinner');
+async function handleLogin() {
+  const username = document.getElementById('usernameInput').value.trim();
+  const password = document.getElementById('passwordInput').value.trim();
+  const alertBox = document.getElementById('loginAlert');
+  const alertText = document.getElementById('loginAlertText');
+  const btnSubmit = document.getElementById('btnLoginSubmit');
+  const btnText = document.getElementById('btnLoginText');
+  const btnSpinner = document.getElementById('btnLoginSpinner');
 
-      alertBox.classList.add('d-none');
+  alertBox.classList.add('d-none');
 
-      if (!username || !password) {
-        alertText.textContent = 'Por favor completa todos los campos requeridos.';
-        alertBox.classList.remove('d-none');
-        return;
-      }
+  if (!username || !password) {
+    alertText.textContent = 'Por favor completa todos los campos requeridos.';
+    alertBox.classList.remove('d-none');
+    return;
+  }
 
-      // Estado de carga
-      btnSubmit.disabled = true;
-      btnText.textContent = 'Verificando...';
-      btnSpinner.classList.remove('d-none');
+  btnSubmit.disabled = true;
+  btnText.textContent = 'Verificando...';
+  btnSpinner.classList.remove('d-none');
 
-      try {
-        /*
-          // Ejemplo de integración con tu backend local o API:
-          const response = await fetch('./api-login/index.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-          });
-          const res = await response.json();
-          if (!response.ok) throw new Error(res.error || 'Credenciales inválidas');
-        */
+  try {
+    const response = await fetch('api-login/index.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    });
 
-        // Simulación de respuesta exitosa
-        await new Promise(resolve => setTimeout(resolve, 800));
+    const result = await response.json();
 
-        // Redirección a la pantalla de captura
-        window.location.href = './adm/';
-
-      } catch (err) {
-        alertText.textContent = err.message || 'Error al iniciar sesión. Inténtalo de nuevo.';
-        alertBox.classList.remove('d-none');
-      } finally {
-        btnSubmit.disabled = false;
-        btnText.textContent = 'Ingresar al Sistema';
-        btnSpinner.classList.add('d-none');
-      }
+    if (!response.ok || !result.success) {
+      throw new Error(result.error || 'Credenciales inválidas');
     }
+
+    // Redirección hacia la carpeta protegida
+    window.location.href = result.redirect || './adm/';
+
+  } catch (err) {
+    alertText.textContent = err.message || 'Error al conectar con el servidor.';
+    alertBox.classList.remove('d-none');
+  } finally {
+    btnSubmit.disabled = false;
+    btnText.textContent = 'Ingresar al Sistema';
+    btnSpinner.classList.add('d-none');
+  }
+}
