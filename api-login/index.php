@@ -2,13 +2,17 @@
 // login_process.php
 declare(strict_types=1);
 
+// Mostrar errores en respuesta JSON durante desarrollo
+ini_set('display_errors', '0'); // Mantener en 0 para no corromper la salida JSON
+error_reporting(E_ALL);
+
 // Configuración de cookies de sesión seguras antes de iniciar
 session_set_cookie_params([
-    'lifetime' => 0,             // Dura hasta cerrar el navegador (o ajústalo a segundos)
+    'lifetime' => 0,
     'path'     => '/',
     'domain'   => '',
-    'secure'   => isset($_SERVER['HTTPS']), // Solo HTTPS si está disponible
-    'httponly' => true,         // Evita que JavaScript pueda leer la cookie (protege contra XSS)
+    'secure'   => isset($_SERVER['HTTPS']),
+    'httponly' => true,
     'samesite' => 'Lax'
 ]);
 
@@ -35,53 +39,78 @@ if ($username === '' || $password === '') {
     exit;
 }
 
-/*
- * AQUÍ HACES LA CONSULTA A TU BASE DE DATOS (PDO)
- * Ejemplo:
- * $stmt = $pdo->prepare('SELECT id, nombre, password_hash, rol FROM promotores WHERE clave = ? OR email = ?');
- * $stmt->execute([$username, $username]);
- * $user = $stmt->fetch();
- */
+// -------------------------------------------------------------
+// CONEXIÓN A BASE DE DATOS (Ajusta la ruta a tu archivo de conexión)
+// -------------------------------------------------------------
+try {
+    // Si ya tienes un archivo de conexión, descomenta la siguiente línea:
+    // require_once __DIR__ . '/../conexion.php'; 
 
-// Buscar por clave (ej. PM-0104) o por email
-$stmt = $pdo->prepare("SELECT id, usuario, nombre, password_hash, rol, activo FROM usuarios WHERE (usuario = :input OR email = :input) LIMIT 1");
-$stmt->execute([':input' => $username]);
-$usuario = $stmt->fetch();
+    // O si conectas directamente aquí:
+    $host = 'localhost';
+    $db   = 'gestion_afiliados';
+    $user = 'root';
+    $pass = '';
+    $charset = 'utf8mb4';
 
-if (!$usuario || !password_verify($password, $usuario['password_hash'])) {
-    http_response_code(401);
-    echo json_encode(['success' => false, 'error' => 'Credenciales inválidas']);
+    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    
+    $options = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES   => false,
+    ];
+
+    $pdo = new PDO($dsn, $user, $pass, $options);
+
+} catch (\Throwable $e) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'error' => 'Error de conexión con la base de datos: ' . $e->getMessage()]);
     exit;
 }
 
-if ((int)$usuario['activo'] !== 1) {
-    http_response_code(403);
-    echo json_encode(['success' => false, 'error' => 'Tu cuenta se encuentra inactiva']);
+// -------------------------------------------------------------
+// CONSULTA Y AUTENTICACIÓN
+// -------------------------------------------------------------
+try {
+    // Buscar por usuario o por email
+    $stmt = $pdo->prepare("SELECT id, usuario, nombre, password_hash, rol, estado FROM usuarios WHERE usuario = :input LIMIT 1");
+    $stmt->execute([':input' => $username]);
+    $usuario = $stmt->fetch();
+
+    // 1. Validar si existe y si el hash coincide
+    if (!$usuario || !password_verify($password, $usuario['password_hash'])) {
+        http_response_code(401);
+        echo json_encode(['success' => false, 'error' => 'Usuario o contraseña incorrectos']);
+        exit;
+    }
+
+    // 2. Validar si está activo
+    if ((int)$usuario['estado'] !== 1) {
+        http_response_code(403);
+        echo json_encode(['success' => false, 'error' => 'Tu cuenta se encuentra inactiva. Contacta al administrador.']);
+        exit;
+    }
+
+    // 3. Prevenir Session Fixation
+    session_regenerate_id(true);
+
+    // 4. Guardar datos reales en la sesión de PHP
+    $_SESSION['usuario_autenticado'] = true;
+    $_SESSION['usuario_id'] = $usuario['id'];
+    $_SESSION['usuario_nombre'] = $usuario['nombre'];
+    $_SESSION['usuario_login'] = $usuario['usuario'];
+    $_SESSION['rol'] = $usuario['rol'];
+    $_SESSION['ultimo_acceso'] = time();
+
+    echo json_encode([
+        'success' => true,
+        'redirect' => './adm/'
+    ]);
+    exit;
+
+} catch (\Throwable $e) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'error' => 'Error interno al procesar el login: ' . $e->getMessage()]);
     exit;
 }
-
-// Simulación de verificación con hash seguro (password_verify)
-// Para pruebas, sustituye con tus datos reales de BD:
-$usuarioValido = ($username === $usuario['usuario'] && $password === (password_verify($password, $usuario['password_hash'])));
-
-if (!$usuarioValido) {
-    http_response_code(401);
-    echo json_encode(['success' => false, 'error' => 'Usuario o contraseña incorrectos']);
-    exit;
-}
-
-// Regenerar ID de sesión para prevenir Session Fixation
-session_regenerate_id(true);
-
-// Guardar datos en la sesión de PHP
-$_SESSION['usuario_autenticado'] = true;
-$_SESSION['usuario_id'] = 1;
-$_SESSION['usuario_nombre'] = $username;
-$_SESSION['rol']='';
-$_SESSION['ultimo_acceso'] = time();
-
-echo json_encode([
-    'success' => true,
-    'redirect' => './adm/'
-]);
-exit;

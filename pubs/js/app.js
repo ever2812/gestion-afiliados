@@ -47,14 +47,28 @@ async function handleLogin() {
 
     if (!response.ok || !result.success) {
       throw new Error(result.error || 'Credenciales inválidas');
-    }
+    }  
+
+    // Reemplaza temporalmente 'const result = await response.json();' por:
+// const rawText = await response.text();
+// console.log("Respuesta del servidor:", rawText);
+
+// let result;
+// try {
+//   result = JSON.parse(rawText);
+// } catch (e) {
+//   throw new Error(`El servidor no devolvió JSON válido. Respuesta: "${rawText}"`);
+// }
+
 
     // Redirección hacia la carpeta protegida
     window.location.href = result.redirect || './adm/';
 
   } catch (err) {
+
     alertText.textContent = err.message || 'Error al conectar con el servidor.';
     alertBox.classList.remove('d-none');
+
   } finally {
     btnSubmit.disabled = false;
     btnText.textContent = 'Ingresar';
