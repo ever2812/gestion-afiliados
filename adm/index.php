@@ -344,8 +344,7 @@
 
     <!-- Footer -->
     <footer class="text-center text-muted small mt-5 pt-3">
-      Gestion de Afiliados - @ever2812
-        <!-- Integración con https://extraerdatosdeine.com @ever2812 -->
+      Gestion de Afiliados - @ever2812      
     </footer>
   </main>
 

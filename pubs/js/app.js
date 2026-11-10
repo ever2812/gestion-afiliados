@@ -35,7 +35,7 @@ async function handleLogin() {
   btnSpinner.classList.remove('d-none');
 
   try {
-    const response = await fetch('api-login/index.php', {
+    const response = await fetch('./api-login/index.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

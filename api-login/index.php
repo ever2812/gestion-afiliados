@@ -43,9 +43,26 @@ if ($username === '' || $password === '') {
  * $user = $stmt->fetch();
  */
 
+// Buscar por clave (ej. PM-0104) o por email
+$stmt = $pdo->prepare("SELECT id, usuario, nombre, password_hash, rol, activo FROM usuarios WHERE (usuario = :input OR email = :input) LIMIT 1");
+$stmt->execute([':input' => $username]);
+$usuario = $stmt->fetch();
+
+if (!$usuario || !password_verify($password, $usuario['password_hash'])) {
+    http_response_code(401);
+    echo json_encode(['success' => false, 'error' => 'Credenciales inválidas']);
+    exit;
+}
+
+if ((int)$usuario['activo'] !== 1) {
+    http_response_code(403);
+    echo json_encode(['success' => false, 'error' => 'Tu cuenta se encuentra inactiva']);
+    exit;
+}
+
 // Simulación de verificación con hash seguro (password_verify)
 // Para pruebas, sustituye con tus datos reales de BD:
-$usuarioValido = ($username === 'admin' && $password === '123456');
+$usuarioValido = ($username === $usuario['usuario'] && $password === (password_verify($password, $usuario['password_hash'])));
 
 if (!$usuarioValido) {
     http_response_code(401);
@@ -60,6 +77,7 @@ session_regenerate_id(true);
 $_SESSION['usuario_autenticado'] = true;
 $_SESSION['usuario_id'] = 1;
 $_SESSION['usuario_nombre'] = $username;
+$_SESSION['rol']='';
 $_SESSION['ultimo_acceso'] = time();
 
 echo json_encode([

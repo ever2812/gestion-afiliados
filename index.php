@@ -86,8 +86,8 @@
             <label for="passwordInput" class="form-label-subtle m-0">
               <i class="bi bi-key text-primary me-1"></i> Contraseña <span class="text-danger">*</span>
             </label>
-            <a href="#" class="text-decoration-none small text-muted" style="font-size: 0.75rem;">¿La
-              olvidaste?</a>
+            <!-- <a href="#" class="text-decoration-none small text-muted" style="font-size: 0.75rem;">¿La
+              olvidaste?</a> -->
           </div>
           <div class="input-group">
             <span class="input-group-text bg-white border-end-0 text-muted">
@@ -102,16 +102,6 @@
             </button>
           </div>
         </div>
-
-        <!-- Recordar sesión -->
-        <!-- <div class="d-flex align-items-center justify-content-between mb-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="rememberMe">
-            <label class="form-check-label text-muted small" for="rememberMe" style="font-size: 0.8rem;">
-              Mantener sesión iniciada
-            </label>
-          </div>
-        </div> -->
 
         <!-- Botón de Ingreso con Feedback de Carga -->
         <div class="d-grid">
