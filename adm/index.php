@@ -250,13 +250,13 @@
           </div>
 
           <!-- Domicilio Completo -->
-          <!-- <div class="col-12">
+          <div class="col-12">
             <label class="form-label-subtle">Domicilio Completo</label>
             <input type="text" id="resDomicilio" class="form-control form-control-modern" required>
-          </div> -->
+          </div>
 
           <!-- Calle y Colonia -->
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <label class="form-label-subtle">Calle</label>
             <input type="text" id="resCalle" class="form-control form-control-modern">
           </div>
@@ -264,10 +264,10 @@
           <div class="col-md-6">
             <label class="form-label-subtle">Colonia</label>
             <input type="text" id="resColonia" class="form-control form-control-modern">
-          </div>
+          </div> -->
 
           <!-- Municipio, Estado y C.P. -->
-          <div class="col-md-5">
+          <!-- <div class="col-md-5">
             <label class="form-label-subtle">Municipio / Alcaldía</label>
             <input type="text" id="resMunicipio" class="form-control form-control-modern">
           </div>
@@ -280,22 +280,22 @@
           <div class="col-md-3">
             <label class="form-label-subtle">Código Postal</label>
             <input type="text" id="resCodigoPostal" class="form-control form-control-modern font-monospace" maxlength="5">
-          </div>
+          </div> -->
 
           <!-- Nacimiento, Sexo, Sección -->
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <label class="form-label-subtle">Fecha de Nacimiento</label>
             <input type="text" id="resFechaNacimiento" class="form-control form-control-modern" placeholder="DD/MM/AAAA">
-          </div>
+          </div> -->
 
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <label class="form-label-subtle">Sexo</label>
             <select id="resSexo" class="form-select form-select-modern">
               <option value="H">Hombre (H)</option>
               <option value="M">Mujer (M)</option>
               <option value="X">No Binario (X)</option>
             </select>
-          </div>
+          </div> -->
 
           <div class="col-md-4">
             <label class="form-label-subtle">Sección Electoral</label>
