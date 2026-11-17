@@ -116,7 +116,7 @@
         </div>
       </div>
 
-      <a href="api/session/end.php" class="btn btn-outline-danger w-100 rounded-2 btn-sm d-flex align-items-center justify-content-center gap-2 py-2">
+      <a href="../api/session/end.php" class="btn btn-outline-danger w-100 rounded-2 btn-sm d-flex align-items-center justify-content-center gap-2 py-2">
         <i class="bi bi-box-arrow-right"></i>
         <span>Cerrar Sesión</span>
       </a>
@@ -313,10 +313,10 @@
             <input type="text" id="resEmision" class="form-control form-control-modern font-monospace">
           </div>
 
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <label class="form-label-subtle">Año de Registro</label>
             <input type="text" id="resAnioRegistro" class="form-control form-control-modern font-monospace">
-          </div>
+          </div> -->
 
           <!-- Códigos OCR / CIC (opcional) -->
           <!-- <div class="col-md-6">
@@ -332,11 +332,10 @@
 
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-4 pt-3 border-top">
           <button type="button" class="btn btn-outline-secondary rounded-2 btn-sm px-3" onclick="resetAll()">
-            <i class="bi bi-arrow-counterclockwise me-1"></i> Limpiar y Agregar
+            <i class="bi bi-arrow-counterclockwise me-1"></i> Limpiar Datos
           </button>
-          <button type="submit" id="btnSaveRecord" class="btn btn-primary rounded-2 btn-sm px-4 d-flex align-items-center gap-2">
-            <i class="bi bi-cloud-arrow-up"></i>
-            <span>Guardar Datos</span>
+          <button type="submit" id="btnSaveRecord" class="btn btn-primary rounded-2 btn-sm px-4 d-flex align-items-center gap-2">           
+            <span>Guardar Registro</span>
           </button>
         </div>
       </form>

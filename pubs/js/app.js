@@ -62,7 +62,7 @@ async function handleLogin() {
 
 
     // Redirección hacia la carpeta protegida
-    window.location.href = result.redirect || './adm/';
+    window.location.href = result.redirect || './adm/afiliados/';
 
   } catch (err) {
 

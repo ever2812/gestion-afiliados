@@ -105,7 +105,7 @@ try {
 
     echo json_encode([
         'success' => true,
-        'redirect' => './adm/'
+        'redirect' => './adm/afiliados'
     ]);
     exit;
 

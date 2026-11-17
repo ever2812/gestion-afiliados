@@ -152,7 +152,7 @@ async function handleExtractData() {
           municipio: "BENITO JUÁREZ",
           estado: "CIUDAD DE MÉXICO",
           seccion: "4321",
-          vigencia: "2024-2034",
+          vigencia: "2026",
           emision: "02",
           anioRegistro: "2006",
           ocr: "0943210123456",
@@ -234,7 +234,7 @@ function populateResults(data, promoter, tokens) {
   document.getElementById("resSeccion").value = data.seccion || "";
   document.getElementById("resVigencia").value = data.vigencia || "";
   document.getElementById("resEmision").value = data.emision || "";
-  document.getElementById("resAnioRegistro").value = data.anioRegistro || "";
+  // document.getElementById("resAnioRegistro").value = data.anioRegistro || "";
   //   document.getElementById('resOcr').value = data.ocr || '';
   //   document.getElementById('resCic').value = data.cic || '';
 
@@ -280,7 +280,7 @@ function copyExtractedJSON() {
     seccion: document.getElementById("resSeccion").value,
     vigencia: document.getElementById("resVigencia").value,
     emision: document.getElementById("resEmision").value,
-    anioRegistro: document.getElementById("resAnioRegistro").value,
+    // anioRegistro: document.getElementById("resAnioRegistro").value,
     // ocr: document.getElementById('resOcr').value,
     // cic: document.getElementById('resCic').value
   };
