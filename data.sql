@@ -21,3 +21,20 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
     $rol      = 'admin';
 INSERT INTO usuarios (usuario, nombre, email, password_hash, rol, estado) 
             VALUES (:usuario, :nombre, :email, :password_hash, :rol, 1)
+
+
+CREATE TABLE afiliados (
+	idRegistro INT auto_increment NOT NULL PRIMARY KEY,
+	nombres varchar(60) NOT NULL,
+	apPaterno varchar(50) NOT NULL,
+	apMaterno varchar(50) NOT NULL,
+	cveElector varchar(25) NOT NULL,
+	domicilio TEXT NOT NULL,
+	seccion varchar(10) NOT NULL,
+	vigencia INT NOT NULL,
+	emision INT NOT NULL,
+	casilla varchar(5) NULL,
+	curp varchar(20) NOT NULL,
+	CONSTRAINT afiliados_unique UNIQUE KEY (curp)
+);
+
