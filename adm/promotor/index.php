@@ -10,7 +10,6 @@
   <link rel="icon" href="../../pubs/img/manage.png" type="image/png">
   <title>Gestión de Promotores</title>
   
-  
   <!-- Bootstrap 5.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
@@ -151,7 +150,7 @@
         </div>
       </div>
 
-      <form id="promotorForm" onsubmit="event.preventDefault(); handleSavePromotor();">
+      <form id="formPromotor" onsubmit="event.preventDefault(); handleSavePromotor();">
         <div class="row g-3">
           
           <!-- Nombre(s) -->
@@ -161,8 +160,8 @@
             </label>
             <input 
               type="text" 
-              id="nombre" 
-              name="nombre"
+              id="nombres" 
+              name="nombres"
               class="form-control form-control-modern" 
               placeholder="Ej. Carlos" 
               autocomplete="given-name"
@@ -177,8 +176,8 @@
             </label>
             <input 
               type="text" 
-              id="apellidoPaterno" 
-              name="apellidoPaterno"
+              id="aPaterno" 
+              name="aPaterno"
               class="form-control form-control-modern" 
               placeholder="Ej. Mendoza" 
               autocomplete="family-name"
@@ -193,8 +192,8 @@
             </label>
             <input 
               type="text" 
-              id="apellidoMaterno" 
-              name="apellidoMaterno"
+              id="aMaterno" 
+              name="aMaterno"
               class="form-control form-control-modern" 
               placeholder="Ej. López"
             >
@@ -262,10 +261,7 @@
           </thead>
           <tbody id="promotoresTableBody">
             <!-- Ejemplo estático inicial / se poblará dinámicamente -->
-            <tr>
-              <td class="fw-medium text-dark">Carlos Mendoza</td>
-              <td class="font-monospace text-muted">9611234567</td>
-              <td class="text-end"><span class="badge bg-success-subtle text-success border border-success-subtle">Activo</span></td>
+            <tr>              
             </tr>
           </tbody>
         </table>
@@ -280,81 +276,6 @@
 
   <!-- Bootstrap Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <script>
-    // Solo permitir dígitos en el teléfono
-    document.getElementById('telefono').addEventListener('input', function (e) {
-      this.value = this.value.replace(/\D/g, '').slice(0, 10);
-    });
-
-    function showStatus(message, type = 'success') {
-      const box = document.getElementById('statusMessage');
-      box.className = `alert alert-${type} py-2 px-3 rounded-3 small mb-3 shadow-sm`;
-      box.innerHTML = `<i class="bi bi-${type === 'success' ? 'check-circle' : 'exclamation-circle'} me-1"></i> ${message}`;
-      box.classList.remove('d-none');
-    }
-
-    function resetPromotorForm() {
-      document.getElementById('promotorForm').reset();
-      document.getElementById('statusMessage').classList.add('d-none');
-    }
-
-    async function handleSavePromotor() {
-      const nombre = document.getElementById('nombre').value.trim();
-      const apellidoPaterno = document.getElementById('apellidoPaterno').value.trim();
-      const apellidoMaterno = document.getElementById('apellidoMaterno').value.trim();
-      const telefono = document.getElementById('telefono').value.trim();
-
-      const btn = document.getElementById('btnSavePromotor');
-      const btnText = document.getElementById('btnSaveText');
-      const spinner = document.getElementById('btnSaveSpinner');
-
-      if (!nombre || !apellidoPaterno || telefono.length !== 10) {
-        showStatus('Verifica que el nombre, apellido paterno y teléfono (10 dígitos) sean válidos.', 'danger');
-        return;
-      }
-
-      btn.disabled = true;
-      btnText.textContent = 'Guardando...';
-      spinner.classList.remove('d-none');
-
-      try {
-        
-        // Integración con tu endpoint PHP:
-        const response = await fetch('./api/promotor/create.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nombre, apellidoPaterno, apellidoMaterno, telefono })
-        });
-        const result = await response.json();
-        if (!response.ok || !result.success) throw new Error(result.error || 'No se pudo guardar');
-        
-
-        // Simulación de guardado
-        // await new Promise(r => setTimeout(r, 600));
-
-        // Agregar a la tabla visualmente
-        const tbody = document.getElementById('promotoresTableBody');
-        const nombreCompleto = `${nombre} ${apellidoPaterno} ${apellidoMaterno}`.trim();
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="fw-medium text-dark">${nombreCompleto}</td>
-          <td class="font-monospace text-muted">${telefono}</td>
-          <td class="text-end"><span class="badge bg-success-subtle text-success border border-success-subtle">Activo</span></td>
-        `;
-        tbody.prepend(tr);
-
-        showStatus(`Promotor <strong>${nombreCompleto}</strong> guardado correctamente.`, 'success');
-        document.getElementById('promotorForm').reset();
-
-      } catch (err) {
-        showStatus(err.message || 'Error al registrar promotor.', 'danger');
-      } finally {
-        btn.disabled = false;
-        btnText.textContent = 'Guardar Promotor';
-        spinner.classList.add('d-none');
-      }
-    }
-  </script>
+  <script src="../js/createPromotor.js"></script>
 </body>
 </html>

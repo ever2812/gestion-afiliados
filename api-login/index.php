@@ -97,7 +97,7 @@ try {
 
     // 4. Guardar datos reales en la sesión de PHP
     $_SESSION['usuario_autenticado'] = true;
-    $_SESSION['usuario_id'] = $usuario['id'];
+    $_SESSION['idUsuario'] = $usuario['id'];
     $_SESSION['usuario_nombre'] = $usuario['nombre'];
     $_SESSION['usuario_login'] = $usuario['usuario'];
     $_SESSION['rol'] = $usuario['rol'];

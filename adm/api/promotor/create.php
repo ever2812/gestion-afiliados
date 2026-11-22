@@ -1,9 +1,28 @@
 
 <?php
 
+session_start();
+// Validar sesión activa
+if (!isset($_SESSION['idUsuario'])) {
+
+    http_response_code(401);
+
+    echo json_encode([
+        'success' => false,
+        'mensaje' => 'Sesión no válida. Inicie sesión nuevamente.'
+    ], JSON_UNESCAPED_UNICODE);
+
+    exit;
+}
+
+// Obtener ID directamente de la sesión
+$idUsuario = $_SESSION['idUsuario'];
+
 header('Content-Type: application/json; charset=utf-8');
 
 require_once '../config/conexion.php';
+
+
 
 // Aceptar únicamente solicitudes POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -37,19 +56,15 @@ try {
     $nombres = trim($datos['nombres'] ?? '');
     $aPaterno = trim($datos['aPaterno'] ?? '');
     $aMaterno = trim($datos['aMaterno'] ?? '');
-    $idUsuario = filter_var(
-        $datos['idUsuario'] ?? null,
-        FILTER_VALIDATE_INT
-    );
+    $telefono = trim($datos['telefono'] ?? '');
+
 
     // Validar campos obligatorios
     if (
         $nombres === '' ||
         $aPaterno === '' ||
         $aMaterno === '' ||
-        $idUsuario === false ||
-        $idUsuario === null ||
-        $idUsuario <= 0
+        $telefono < 10
     ) {
 
         http_response_code(400);
@@ -66,7 +81,8 @@ try {
     if (
         mb_strlen($nombres) > 50 ||
         mb_strlen($aPaterno) > 50 ||
-        mb_strlen($aMaterno) > 50
+        mb_strlen($aMaterno) > 50 ||
+        mb_strlen($telefono) > 10
     ) {
 
         http_response_code(400);
@@ -81,9 +97,9 @@ try {
 
     // Insertar nuevo promotor
     $sql = "INSERT INTO promotores
-            (nombres, aPaterno, aMaterno, idUsuario)
+            (nombres, aPaterno, aMaterno, telefono, idUsuario)
             VALUES
-            (:nombres, :aPaterno, :aMaterno, :idUsuario)";
+            (:nombres, :aPaterno, :aMaterno, :telefono, :idUsuario)";
 
     $stmt = $conexion->prepare($sql);
 
@@ -91,8 +107,9 @@ try {
         ':nombres' => $nombres,
         ':aPaterno' => $aPaterno,
         ':aMaterno' => $aMaterno,
-        ':idUsuario' => $idUsuario
-    ]);
+        ':idUsuario' => $idUsuario,
+        ':telefono'=> $telefono
+     ]);
 
     // Obtener ID del nuevo registro
     $idPromotor = $conexion->lastInsertId();
@@ -106,19 +123,21 @@ try {
             'idPromotor' => (int) $idPromotor,
             'nombres' => $nombres,
             'aPaterno' => $aPaterno,
-            'aMaterno' => $aMaterno
+            'aMaterno' => $aMaterno,
+            'telefono' => $telefono,
         ]
     ], JSON_UNESCAPED_UNICODE);
 
 } catch (PDOException $e) {
 
     error_log($e->getMessage());
+    $mjs = $e->getMessage();
 
     http_response_code(500);
 
     echo json_encode([
         'success' => false,
-        'mensaje' => 'Ocurrió un error al registrar el promotor.'
+        'mensaje' => 'Ocurrió un error al registrar el promotor.'.$mjs
     ], JSON_UNESCAPED_UNICODE);
 
 }

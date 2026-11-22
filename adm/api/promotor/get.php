@@ -2,6 +2,8 @@
 
 header('Content-Type: application/json; charset=utf-8');
 
+include '../session/check.php';
+
 require_once '../config/conexion.php';
 
 try {
