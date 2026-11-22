@@ -7,6 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../../pubs/img/manage.png" type="image/png">
   <title>Captura de Afiliados</title>
   
   <!-- Bootstrap 5.3 CSS -->

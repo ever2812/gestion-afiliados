@@ -7,7 +7,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../../pubs/img/manage.png" type="image/png">
   <title>Gestión de Promotores</title>
+  
   
   <!-- Bootstrap 5.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../pubs/estilo.css">
+  <link rel="stylesheet" href="../../pubs/estilo.css">
 </head>
 <body class="pb-5">
 
@@ -226,12 +228,12 @@
         <!-- Botones de Acción -->
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-4 pt-3 border-top">
           <button type="button" class="btn btn-outline-secondary rounded-2 btn-sm px-3" onclick="resetPromotorForm()">
-            <i class="bi bi-arrow-counterclockwise me-1"></i> Limpiar Campos
+            <i class="bi bi-arrow-counterclockwise me-1"></i> Limpiar
           </button>
           
           <button type="submit" id="btnSavePromotor" class="btn btn-dark rounded-2 btn-sm px-4 py-2 d-flex align-items-center gap-2">
             <i class="bi bi-check2-circle"></i>
-            <span id="btnSaveText">Guardar Promotor</span>
+            <span id="btnSaveText">Guardar</span>
             <div id="btnSaveSpinner" class="spinner-border spinner-border-sm d-none" role="status">
               <span class="visually-hidden">Guardando...</span>
             </div>
@@ -317,19 +319,19 @@
       spinner.classList.remove('d-none');
 
       try {
-        /* 
+        
         // Integración con tu endpoint PHP:
-        const response = await fetch('./api/promotores/create.php', {
+        const response = await fetch('./api/promotor/create.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ nombre, apellidoPaterno, apellidoMaterno, telefono })
         });
         const result = await response.json();
         if (!response.ok || !result.success) throw new Error(result.error || 'No se pudo guardar');
-        */
+        
 
         // Simulación de guardado
-        await new Promise(r => setTimeout(r, 600));
+        // await new Promise(r => setTimeout(r, 600));
 
         // Agregar a la tabla visualmente
         const tbody = document.getElementById('promotoresTableBody');

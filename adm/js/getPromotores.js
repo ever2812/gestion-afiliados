@@ -2,7 +2,7 @@ async function cargarPromotores() {
   const select = document.getElementById("promotorSelect");
 
   try {
-    const respuesta = await fetch("../api/promotor/getPromotores.php");
+    const respuesta = await fetch("../api/promotor/get.php");
 
     if (!respuesta.ok) {
       throw new Error("Error al consultar el servidor");

@@ -12,7 +12,8 @@ try {
                     nombres, ' ',
                     aPaterno, ' ',
                     aMaterno
-                ) AS nombreCompleto
+                ) AS nombreCompleto,
+                telefono
             FROM promotores
             WHERE estado = 1
             ORDER BY aPaterno, aMaterno, nombres";
