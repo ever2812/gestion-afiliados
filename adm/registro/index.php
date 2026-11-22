@@ -155,12 +155,7 @@
           </label>
         </div>
         <select class="form-select form-select-modern" id="promotorSelect" required>
-          <option value="" disabled selected>Seleccione un promotor...</option>
-          <option value="Carlos Mendoza — Zona Norte (PM-0104)">Carlos Mendoza - Barrio 1</option>
-          <option value="Ana Sofía Ruiz — Zona Centro (PM-0219)">Ana Sofía Ruiz — Barrio 2</option>
-          <option value="Mauricio Lozano — Zona Poniente (PM-0345)">Mauricio Lozano — Barrio 3</option>
-          <option value="Valeria Gómez — Zona Sur (PM-0412)">Valeria Gómez — Zona Sur</option>
-          <option value="Héctor Salgado — Ventas Remotas (PM-0087)">Héctor Salgado — Ventas Remotas</option>
+          <option value="">Seleccione un promotor...</option>
         </select>
       </section>
 
@@ -236,13 +231,13 @@
 
           <!-- Apellido Paterno -->
           <div class="col-md-4">
-            <label class="form-label-subtle">Primer Apellido (Paterno)</label>
+            <label class="form-label-subtle">Apellido Paterno</label>
             <input type="text" id="resApellidoPaterno" class="form-control form-control-modern" required>
           </div>
 
           <!-- Apellido Materno -->
           <div class="col-md-4">
-            <label class="form-label-subtle">Segundo Apellido (Materno)</label>
+            <label class="form-label-subtle">Apellido Materno</label>
             <input type="text" id="resApellidoMaterno" class="form-control form-control-modern">
           </div>
 
@@ -362,6 +357,7 @@
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script src="../js/app.js"></script>
+  <script src="../js/getPromotores.js"></script>
 
 
 </body>

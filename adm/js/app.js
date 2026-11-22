@@ -152,7 +152,7 @@ async function handleExtractData() {
           municipio: "BENITO JUÁREZ",
           estado: "CIUDAD DE MÉXICO",
           seccion: "4321",
-          vigencia: "2026",
+          vigencia: "2027",
           emision: "02",
           anioRegistro: "2006",
           ocr: "0943210123456",
