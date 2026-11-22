@@ -1,5 +1,5 @@
 <?php
-  include 'api/session/check.php';
+  include '../api/session/check.php';
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../pubs/estilo.css">
+  <link rel="stylesheet" href="../../pubs/estilo.css">
 
 </head>
 <body class="pb-5">
@@ -72,31 +72,40 @@
     <div class="list-group list-group-flush border-0">
       
       <!-- Opción: Captura de INE (Activa en la pantalla actual) -->
-      <a href="./index.php" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 bg-light text-dark fw-semibold">
-        <i class="bi bi-camera-fill text-primary fs-5"></i>
-        <div>
-          <span class="d-block lh-1">Captura INE</span>
-          <small class="text-muted fw-normal" style="font-size: 0.75rem;">Escanear y afiliar</small>
-        </div>
-      </a>
+        <a href="../registro/" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
+          <i class="bi bi-camera-fill text-muted fs-5"></i>
+          <div>
+            <span class="d-block lh-1 text-dark fw-medium">Registro</span>
+            <small class="text-muted" style="font-size: 0.75rem;">Escanear y afiliar</small>
+          </div>
+        </a>
 
-      <!-- Opción: Mini Dashboard / Estadísticas -->
-      <a href="./dashboard.php" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
-        <i class="bi bi-bar-chart-line-fill text-muted fs-5"></i>
-        <div>
-          <span class="d-block lh-1 text-dark fw-medium">Dashboard</span>
-          <small class="text-muted" style="font-size: 0.75rem;">Resultados y métricas</small>
-        </div>
-      </a>
+        <!-- Opción: Promotores (Activa en esta pantalla) -->
+        <a href="../promotor/" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 bg-light text-dark fw-semibold">
+          <i class="bi bi-person-badge-fill text-primary fs-5"></i>
+          <div>
+            <span class="d-block lh-1">Promotores</span>
+            <small class="text-muted fw-normal" style="font-size: 0.75rem;">Alta y gestión de equipo</small>
+          </div>
+        </a>
 
-      <!-- Opción: Listado de Afiliados Capturados -->
-      <a href="./afiliados.php" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
-        <i class="bi bi-people-fill text-muted fs-5"></i>
-        <div>
-          <span class="d-block lh-1 text-dark fw-medium">Afiliados</span>
-          <small class="text-muted" style="font-size: 0.75rem;">Consulta de registros</small>
-        </div>
-      </a>
+        <!-- Opción: Mini Dashboard / Estadísticas -->
+        <a href="./dashboard.php" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
+          <i class="bi bi-bar-chart-line-fill text-muted fs-5"></i>
+          <div>
+            <span class="d-block lh-1 text-dark fw-medium">Dashboard</span>
+            <small class="text-muted" style="font-size: 0.75rem;">Resultados y métricas</small>
+          </div>
+        </a>
+
+        <!-- Opción: Listado de Afiliados Capturados -->
+        <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
+          <i class="bi bi-people-fill text-muted fs-5"></i>
+          <div>
+            <span class="d-block lh-1 text-dark fw-medium">Afiliados</span>
+            <small class="text-muted" style="font-size: 0.75rem;">Consulta de registros</small>
+          </div>
+        </a>
 
     </div>
 
@@ -349,7 +358,9 @@
 
   <!-- Bootstrap Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./js/app.js"></script>
+<!--SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/app.js"></script>
 
 
 </body>

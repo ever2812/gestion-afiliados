@@ -1,5 +1,5 @@
 <?php
-  include 'api/session/check.php';
+  include '../api/session/check.php';
 ?>
 
 <!DOCTYPE html>
@@ -71,16 +71,16 @@
       <div class="list-group list-group-flush border-0">
         
         <!-- Opción: Captura de INE -->
-        <a href="./index.php" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
+       <a href="../registro/" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
           <i class="bi bi-camera-fill text-muted fs-5"></i>
           <div>
-            <span class="d-block lh-1 text-dark fw-medium">Captura INE</span>
+            <span class="d-block lh-1 text-dark fw-medium">Registro</span>
             <small class="text-muted" style="font-size: 0.75rem;">Escanear y afiliar</small>
           </div>
         </a>
 
         <!-- Opción: Promotores (Activa en esta pantalla) -->
-        <a href="./promotores.php" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 bg-light text-dark fw-semibold">
+        <a href="../promotor/" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 bg-light text-dark fw-semibold">
           <i class="bi bi-person-badge-fill text-primary fs-5"></i>
           <div>
             <span class="d-block lh-1">Promotores</span>
@@ -98,7 +98,7 @@
         </a>
 
         <!-- Opción: Listado de Afiliados Capturados -->
-        <a href="./afiliados.php" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
+        <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
           <i class="bi bi-people-fill text-muted fs-5"></i>
           <div>
             <span class="d-block lh-1 text-dark fw-medium">Afiliados</span>

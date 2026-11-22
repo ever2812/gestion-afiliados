@@ -152,13 +152,13 @@ async function handleExtractData() {
           municipio: "BENITO JUÁREZ",
           estado: "CIUDAD DE MÉXICO",
           seccion: "4321",
-          vigencia: "2026",
+          vigencia: "2028",
           emision: "02",
           anioRegistro: "2006",
           ocr: "0943210123456",
           cic: "194857201",
         },
-        tokens_remaining: 18,
+        // tokens_remaining: 18,
         upload_method: "multipart",
       };
       showStatus("Modo Demo: Datos simulados con éxito (conforme al formato de extraerdatosdeine.com).", "info");
@@ -194,7 +194,7 @@ async function handleExtractData() {
     }
 
     if (responseData && responseData.data) {
-      populateResults(responseData.data, selectedPromoter, responseData.tokens_remaining);
+      llenarDatosExtraidos(responseData.data, selectedPromoter, responseData.tokens_remaining);
     } else {
       throw new Error("La API respondió pero no contenía datos legibles.");
     }
@@ -205,14 +205,14 @@ async function handleExtractData() {
   }
 }
 
-function populateResults(data, promoter, tokens) {
+function llenarDatosExtraidos(data, promoter, tokens) {
   latestExtractedData = {
     promotor: promoter,
     timestamp: new Date().toISOString(),
     ...data,
   };
 
-  // Populate text inputs
+  // llenar datos en los inputs
   document.getElementById("resNombre").value = data.nombre || "";
   document.getElementById("resApellidoPaterno").value = data.apellidoPaterno || "";
   document.getElementById("resApellidoMaterno").value = data.apellidoMaterno || "";
@@ -238,9 +238,62 @@ function populateResults(data, promoter, tokens) {
   //   document.getElementById('resOcr').value = data.ocr || '';
   //   document.getElementById('resCic').value = data.cic || '';
 
+  validarVigenciaIne("resVigencia");
+
   // Show results
   resultsCard.classList.remove("d-none");
   resultsCard.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function validarVigenciaIne(idCampo) {
+  const campo = document.getElementById(idCampo);
+  const anioVigencia = parseInt(campo.value, 10);
+  const anioActual = new Date().getFullYear();
+
+  if (isNaN(anioVigencia)) return;
+
+  if (anioVigencia < anioActual) {
+    campo.style.backgroundColor = "#f8d7da";
+    campo.style.color = "#842029";
+    campo.style.border = "1px solid #dc3545";
+    //agregar sweetalet para notificar que la ine esta vencida
+    Swal.fire({
+      icon: "error",
+      title: "¡Documento vencido!",
+      html: `
+                <p>INE vencida completamente.</p>
+                <p><b>Vigencia:</b> ${anioVigencia}</p>
+                <p>Verifica con el propietario.</p>
+            `,
+      confirmButtonText: "Entendido, continuar",
+      confirmButtonColor: "#b91c1c",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    });
+  } else if (anioVigencia === anioActual) {
+    campo.style.backgroundColor = "#fff3cd";
+    campo.style.color = "#664d03";
+    campo.style.border = "1px solid #ffc107";
+    //agregar sweetalet para notificar que la ine vence este año
+    Swal.fire({
+      icon: "danger",
+      title: "¡Documento por vencer!",
+      html: `
+                <p>La INE vence este año</p>
+                <p><b>Vigencia:</b> ${anioVigencia}</p>
+                <p>Verifica con el propietario.</p>
+            `,
+      confirmButtonText: "Entendido, continuar",
+      confirmButtonColor: "#d4b608",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    });
+  } else {
+    campo.style.backgroundColor = "";
+    campo.style.backgroundColor = "#6deba6";
+    campo.style.color = "";
+    campo.style.border = "#026d33";
+  }
 }
 
 function setLoadingState(isLoading) {
@@ -258,45 +311,46 @@ function setLoadingState(isLoading) {
   }
 }
 
-function copyExtractedJSON() {
-  if (!latestExtractedData) return;
+//funcion para copiar los datos extraidos - se desactiva
+// function copiarDatosJson() {
+//   if (!latestExtractedData) return;
 
-  // Update data with current edited inputs
-  const currentSnapshot = {
-    ...latestExtractedData,
-    nombre: document.getElementById("resNombre").value,
-    apellidoPaterno: document.getElementById("resApellidoPaterno").value,
-    apellidoMaterno: document.getElementById("resApellidoMaterno").value,
-    curp: document.getElementById("resCurp").value,
-    claveElector: document.getElementById("resClaveElector").value,
-    domicilio: document.getElementById("resDomicilio").value,
-    // calle: document.getElementById("resCalle").value,
-    // colonia: document.getElementById("resColonia").value,
-    // municipio: document.getElementById("resMunicipio").value,
-    // estado: document.getElementById("resEstado").value,
-    // codigoPostal: document.getElementById("resCodigoPostal").value,
-    // fechaNacimiento: document.getElementById("resFechaNacimiento").value,
-    // sexo: document.getElementById("resSexo").value,
-    seccion: document.getElementById("resSeccion").value,
-    vigencia: document.getElementById("resVigencia").value,
-    emision: document.getElementById("resEmision").value,
-    // anioRegistro: document.getElementById("resAnioRegistro").value,
-    // ocr: document.getElementById('resOcr').value,
-    // cic: document.getElementById('resCic').value
-  };
+//   // Update data with current edited inputs
+//   const currentSnapshot = {
+//     ...latestExtractedData,
+//     nombre: document.getElementById("resNombre").value,
+//     apellidoPaterno: document.getElementById("resApellidoPaterno").value,
+//     apellidoMaterno: document.getElementById("resApellidoMaterno").value,
+//     curp: document.getElementById("resCurp").value,
+//     claveElector: document.getElementById("resClaveElector").value,
+//     domicilio: document.getElementById("resDomicilio").value,
+//     // calle: document.getElementById("resCalle").value,
+//     // colonia: document.getElementById("resColonia").value,
+//     // municipio: document.getElementById("resMunicipio").value,
+//     // estado: document.getElementById("resEstado").value,
+//     // codigoPostal: document.getElementById("resCodigoPostal").value,
+//     // fechaNacimiento: document.getElementById("resFechaNacimiento").value,
+//     // sexo: document.getElementById("resSexo").value,
+//     seccion: document.getElementById("resSeccion").value,
+//     vigencia: document.getElementById("resVigencia").value,
+//     emision: document.getElementById("resEmision").value,
+//     // anioRegistro: document.getElementById("resAnioRegistro").value,
+//     // ocr: document.getElementById('resOcr').value,
+//     // cic: document.getElementById('resCic').value
+//   };
 
-  const jsonStr = JSON.stringify(currentSnapshot, null, 2);
+//   const jsonStr = JSON.stringify(currentSnapshot, null, 2);
 
-  // Robust copy method for iframe compatibility
-  const dummy = document.createElement("textarea");
-  document.body.appendChild(dummy);
-  dummy.value = jsonStr;
-  dummy.select();
-  document.execCommand("copy");
-  document.body.removeChild(dummy);
+//   // Robust copy method for iframe compatibility
+//   const dummy = document.createElement("textarea");
+//   document.body.appendChild(dummy);
+//   dummy.value = jsonStr;
+//   dummy.select();
+//   document.execCommand("copy");
+//   document.body.removeChild(dummy);
 
-  showStatus("Datos copiados al portapapeles en formato JSON.", "success");
-}
+//   showStatus("Datos copiados al portapapeles en formato JSON.", "success");
+// }
 
 function saveFinalRecord() {
   const btnSave = document.getElementById("btnSaveRecord");

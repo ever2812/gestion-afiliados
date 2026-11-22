@@ -1,77 +1,73 @@
-  //-- Lógica básica de Login y accesibilidad móvil -- //   
-    
-    function togglePasswordVisibility() {
-      const passwordInput = document.getElementById('pswdInput');
-      const eyeIcon = document.getElementById('passwordEyeIcon');
+//-- Lógica básica de Login y accesibilidad móvil -- //
 
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        eyeIcon.classList.replace('bi-eye', 'bi-eye-slash');
-      } else {
-        passwordInput.type = 'password';
-        eyeIcon.classList.replace('bi-eye-slash', 'bi-eye');
-      }
-    }
+function togglePasswordVisibility() {
+  const passwordInput = document.getElementById("pswdInput");
+  const eyeIcon = document.getElementById("passwordEyeIcon");
+
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    eyeIcon.classList.replace("bi-eye", "bi-eye-slash");
+  } else {
+    passwordInput.type = "password";
+    eyeIcon.classList.replace("bi-eye-slash", "bi-eye");
+  }
+}
 
 async function handleLogin() {
-  const user = document.getElementById('usrInput').value.trim();
-  const pswd = document.getElementById('pswdInput').value.trim();
-  const alertBox = document.getElementById('loginAlert');
-  const alertText = document.getElementById('loginAlertText');
-  const btnSubmit = document.getElementById('btnLoginSubmit');
-  const btnText = document.getElementById('btnLoginText');
-  const btnSpinner = document.getElementById('btnLoginSpinner');
+  const user = document.getElementById("usrInput").value.trim();
+  const pswd = document.getElementById("pswdInput").value.trim();
+  const alertBox = document.getElementById("loginAlert");
+  const alertText = document.getElementById("loginAlertText");
+  const btnSubmit = document.getElementById("btnLoginSubmit");
+  const btnText = document.getElementById("btnLoginText");
+  const btnSpinner = document.getElementById("btnLoginSpinner");
 
-  alertBox.classList.add('d-none');
+  alertBox.classList.add("d-none");
 
   if (!user || !pswd) {
-    alertText.textContent = 'Por favor completa todos los campos requeridos.';
-    alertBox.classList.remove('d-none');
+    alertText.textContent = "Por favor completa todos los campos requeridos.";
+    alertBox.classList.remove("d-none");
     return;
   }
 
   btnSubmit.disabled = true;
-  btnText.textContent = 'Verificando...';
-  btnSpinner.classList.remove('d-none');
+  btnText.textContent = "Verificando...";
+  btnSpinner.classList.remove("d-none");
 
   try {
-    const response = await fetch('./api-login/index.php', {
-      method: 'POST',
+    const response = await fetch("./api-login/index.php", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ user, pswd })
+      body: JSON.stringify({ user, pswd }),
     });
 
     const result = await response.json();
 
     if (!response.ok || !result.success) {
-      throw new Error(result.error || 'Credenciales inválidas');
-    }  
+      throw new Error(result.error || "Credenciales inválidas");
+    }
 
     // Reemplaza temporalmente 'const result = await response.json();' por:
-// const rawText = await response.text();
-// console.log("Respuesta del servidor:", rawText);
+    // const rawText = await response.text();
+    // console.log("Respuesta del servidor:", rawText);
 
-// let result;
-// try {
-//   result = JSON.parse(rawText);
-// } catch (e) {
-//   throw new Error(`El servidor no devolvió JSON válido. Respuesta: "${rawText}"`);
-// }
-
+    // let result;
+    // try {
+    //   result = JSON.parse(rawText);
+    // } catch (e) {
+    //   throw new Error(`El servidor no devolvió JSON válido. Respuesta: "${rawText}"`);
+    // }
 
     // Redirección hacia la carpeta protegida
-    window.location.href = result.redirect || './adm/afiliados/';
-
+    window.location.href = result.redirect || "./adm/registro/";
   } catch (err) {
-
-    alertText.textContent = err.message || 'Error al conectar con el servidor.';
-    alertBox.classList.remove('d-none');
-
+    alertText.textContent = err.message || "Error al conectar con el servidor.";
+    alertBox.classList.remove("d-none");
   } finally {
     btnSubmit.disabled = false;
-    btnText.textContent = 'Ingresar';
-    btnSpinner.classList.add('d-none');
+    btnText.textContent = "Ingresar";
+    btnSpinner.classList.add("d-none");
   }
 }
