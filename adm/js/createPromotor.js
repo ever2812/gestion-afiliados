@@ -48,7 +48,7 @@ async function handleSavePromotor() {
     // await new Promise(r => setTimeout(r, 600));
 
     // Agregar a la tabla visualmente
-    const tbody = document.getElementById("promotoresTableBody");
+    const tbody = document.getElementById("tablaPromotores");
     const nombreCompleto = `${nombres} ${aPaterno} ${aMaterno}`.trim();
     const tr = document.createElement("tr");
     tr.innerHTML = `

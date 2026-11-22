@@ -125,7 +125,7 @@
           </div>
         </div>
 
-        <a href="api/session/end.php" class="btn btn-outline-danger w-100 rounded-2 btn-sm d-flex align-items-center justify-content-center gap-2 py-2">
+        <a href="../api/session/end.php" class="btn btn-outline-danger w-100 rounded-2 btn-sm d-flex align-items-center justify-content-center gap-2 py-2">
           <i class="bi bi-box-arrow-right"></i>
           <span>Cerrar Sesión</span>
         </a>
@@ -259,7 +259,7 @@
               <th class="fw-semibold border-0 text-end">Estatus</th>
             </tr>
           </thead>
-          <tbody id="promotoresTableBody">
+          <tbody id="tablaPromotores">
             <!-- Ejemplo estático inicial / se poblará dinámicamente -->
             <tr>              
             </tr>
@@ -276,6 +276,8 @@
 
   <!-- Bootstrap Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/getPromotorTable.js"></script>
   <script src="../js/createPromotor.js"></script>
+
 </body>
 </html>
