@@ -14,7 +14,8 @@ if (!isset($_FILES['image_front'])) {
     exit;
 }
 
-$apiKey = 'ine_3VHQEtU0T6po9cHvOPp68Whw01dcBYR2'; // Tu clave queda protegida en el servidor
+//agregar config con llave api
+include '../config/config.php';
 $file = $_FILES['image_front'];
 
 $cfile = new CURLFile($file['tmp_name'], $file['type'], $file['name']);

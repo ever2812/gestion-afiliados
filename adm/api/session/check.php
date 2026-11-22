@@ -4,7 +4,7 @@ session_start();
 
 if (empty($_SESSION['usuario_autenticado'])) {
     // Si no hay sesión activa, redirige al login
-    header('Location: ../');
+    header('Location: ../../');
     exit;
 }
 
@@ -12,7 +12,7 @@ if (empty($_SESSION['usuario_autenticado'])) {
 if (isset($_SESSION['ultimo_acceso']) && (time() - $_SESSION['ultimo_acceso'] > 1800)) {
     session_unset();
     session_destroy();
-    header('Location: ../');
+    header('Location: ../../');
     exit;
 }
 $_SESSION['ultimo_acceso'] = time();
