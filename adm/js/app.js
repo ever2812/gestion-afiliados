@@ -233,7 +233,7 @@ function llenarDatosExtraidos(data, promoter, tokens) {
 
   document.getElementById("resSeccion").value = data.seccion || "";
   document.getElementById("resVigencia").value = data.vigencia || "";
-  document.getElementById("resEmision").value = data.emision || "";
+  // document.getElementById("resEmision").value = data.emision || "";
   // document.getElementById("resAnioRegistro").value = data.anioRegistro || "";
   //   document.getElementById('resOcr').value = data.ocr || '';
   //   document.getElementById('resCic').value = data.cic || '';
@@ -352,21 +352,21 @@ function setLoadingState(isLoading) {
 //   showStatus("Datos copiados al portapapeles en formato JSON.", "success");
 // }
 
-function saveFinalRecord() {
-  const btnSave = document.getElementById("btnSaveRecord");
-  btnSave.disabled = true;
-  btnSave.innerHTML = `
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        <span>Guardando...</span>
-      `;
+// function saveFinalRecord() {
+//   const btnSave = document.getElementById("btnRegistrar");
+//   btnSave.disabled = true;
+//   btnSave.innerHTML = `
+//         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+//         <span>Guardando...</span>
+//       `;
 
-  setTimeout(() => {
-    btnSave.disabled = false;
-    btnSave.innerHTML = `<i class="bi bi-cloud-arrow-up"></i> <span>Guardar Registro</span>`;
-    const nombreCompleto = `${document.getElementById("resNombre").value} ${document.getElementById("resApellidoPaterno").value}`;
-    showStatus(`¡Registro de ${nombreCompleto || "la persona"} guardado correctamente!`, "success");
-  }, 800);
-}
+//   setTimeout(() => {
+//     btnSave.disabled = false;
+//     btnSave.innerHTML = `<i class="bi bi-cloud-arrow-up"></i> <span>Guardar Registro</span>`;
+//     const nombreCompleto = `${document.getElementById("resNombre").value} ${document.getElementById("resApellidoPaterno").value}`;
+//     showStatus(`¡Registro de ${nombreCompleto || "la persona"} guardado correctamente!`, "success");
+//   }, 800);
+// }
 
 function resetAll() {
   document.getElementById("ineExtractionForm").reset();
@@ -382,6 +382,9 @@ function showStatus(text, variant = "info") {
   statusMessage.className = `alert alert-${variant} border py-2 px-3 rounded-3 small mb-3 shadow-sm`;
   statusMessage.textContent = text;
   statusMessage.classList.remove("d-none");
+  setTimeout(() => {
+    statusMessage.classList.add("d-none");
+  }, 3000);
 }
 
 function hideStatus() {

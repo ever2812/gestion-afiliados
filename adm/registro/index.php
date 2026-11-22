@@ -171,12 +171,7 @@
 
         <!-- Zona Drag & Drop -->
         <div id="dropZone" class="dropzone-container p-4 text-center">
-          <input 
-            type="file" 
-            id="ineFileInput" 
-            class="d-none" 
-            accept="image/jpeg,image/png,image/webp,application/pdf"
-          >
+          <input type="file" id="ineFileInput" class="d-none" accept="image/jpeg,image/png,image/webp,application/pdf">
           <div class="py-2">
             <i class="bi bi-cloud-arrow-up fs-2 text-secondary mb-2 d-block"></i>
             <p class="fw-semibold text-dark small mb-1">Arrastra la imagen del INE aquí</p>
@@ -221,7 +216,7 @@
     <section id="resultsCard" class="card card-modern p-4 d-none fade-slide-in">
 
       <!-- Formulario con campos extraídos de la credencial -->
-      <form id="extractedDataForm" onsubmit="event.preventDefault(); saveFinalRecord();">
+      <form id="extractedDataForm" onsubmit="event.preventDefault();">
         <div class="row g-3">
           
           <!-- Nombre(s) -->
@@ -313,10 +308,10 @@
             <input type="text" id="resVigencia" class="form-control form-control-modern font-monospace">
           </div>
 
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <label class="form-label-subtle">Emisión</label>
             <input type="text" id="resEmision" class="form-control form-control-modern font-monospace">
-          </div>
+          </div> -->
 
           <!-- <div class="col-md-4">
             <label class="form-label-subtle">Año de Registro</label>
@@ -337,19 +332,19 @@
 
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-4 pt-3 border-top">
           <button type="button" class="btn btn-outline-secondary rounded-2 btn-sm px-3" onclick="resetAll()">
-            <i class="bi bi-arrow-counterclockwise me-1"></i> Limpiar Datos
+            <i class="bi bi-arrow-counterclockwise me-1"></i> Limpiar
           </button>
-          <button type="submit" id="btnSaveRecord" class="btn btn-primary rounded-2 btn-sm px-4 d-flex align-items-center gap-2">           
-            <span>Guardar Registro</span>
+          <button type="submit" id="btnRegistrar" class="btn btn-primary rounded-2 btn-sm px-4 d-flex align-items-center gap-2">           
+            <span>Registrar</span>
           </button>
         </div>
       </form>
     </section>
 
     <!-- Footer -->
-    <footer class="text-center text-muted small mt-5 pt-3">
-      Gestion de Afiliados - @ever2812      
-    </footer>
+    <!-- <footer class="text-center text-muted small mt-5 pt-3">
+      Gestion de Afiliados  
+    </footer> -->
   </main>
 
   <!-- Bootstrap Bundle JS -->
@@ -359,6 +354,7 @@
 
   <script src="../js/app.js"></script>
   <script src="../js/getPromotores.js"></script>
+  <script src="../js/saveAfiliado.js"></script>
 
 
 </body>
