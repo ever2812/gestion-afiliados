@@ -149,7 +149,7 @@ $finfo = new finfo(FILEINFO_MIME_TYPE);
 $mime = $finfo->file($archivo['tmp_name']);
 
 $tiposPermitidos = [
-    'image/jpeg' =>'jpeg',
+    'image/jpeg' => 'jpeg',
     'image/jpg' => 'jpg',
     'image/png'  => 'png',
     'image/webp' => 'webp'
@@ -201,6 +201,12 @@ if (file_exists($rutaFisica)) {
     exit;
 }
 
+include 'funcionCasillas.php';
+
+$codigoApellido = obtenerCodigoApellido($aPaterno);
+
+$casilla = obtenerCasilla($seccion, $codigoApellido);
+
 try {
 
     // Mover archivo a docs
@@ -209,21 +215,8 @@ try {
     }
 
     // Insertar afiliado
-    $sql = "INSERT INTO afiliados (
-                nombres,
-                aPaterno,
-                aMaterno,
-                curp,
-                cveElector,
-                domicilio,
-                seccion,
-                ineVigencia,
-                -- casilla,                
-                idPromotor,
-                idUsuario,
-                fechaRegistro,                
-                fotoIne
-            ) VALUES (
+    $sql = "INSERT INTO afiliados (nombres,aPaterno,aMaterno,curp,cveElector,domicilio,seccion,ineVigencia,casilla,idPromotor,idUsuario,fechaRegistro,fotoIne) 
+            VALUES (
                 :nombres,
                 :aPaterno,
                 :aMaterno,
@@ -232,7 +225,7 @@ try {
                 :domicilio,
                 :seccion,
                 :ineVigencia,
-                -- :casilla,                
+                :casilla,                
                 :idPromotor,
                 :idUsuario,
                 NOW(),
@@ -250,7 +243,7 @@ try {
         ':domicilio'   => $domicilio,
         ':seccion'     => $seccion,
         ':ineVigencia' => $ineVigencia,
-        // ':casilla'     => $casilla,        
+        ':casilla'     => $casilla,
         ':idPromotor'  => $idPromotor,
         ':idUsuario'   => $idUsuario,
         ':fotoIne'     => $rutaBD
@@ -266,7 +259,6 @@ try {
             'fotoIne' => $rutaBD
         ]
     ], JSON_UNESCAPED_UNICODE);
-
 } catch (Throwable $e) {
 
     // Si ocurrió un error, eliminar la imagen que ya se guardó
@@ -287,7 +279,7 @@ try {
         http_response_code(500);
         echo json_encode([
             'success' => false,
-            'mensaje' => 'Ocurrió un error al guardar el afiliado o su fotografía.'.$e->getMessage()
+            'mensaje' => 'Ocurrió un error al guardar el afiliado o su fotografía.' . $e->getMessage()
         ], JSON_UNESCAPED_UNICODE);
     }
 }

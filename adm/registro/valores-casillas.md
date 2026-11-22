@@ -1,3 +1,44 @@
-A - H = B
-I - N = C1
-O - Z = C2
+A: 65
+B: 66
+C: 67
+D: 68
+E: 69
+F: 70
+G: 71
+H: 72
+I: 73
+J: 74
+K: 75
+L: 76
+M: 77
+N: 78
+O: 79
+P: 80
+Q: 81
+R: 82
+S: 83
+T: 84
+U: 85
+V: 86
+W: 87
+X: 88
+Y: 89
+Z: 90
+
+###### SECCION 0433
+
+BASICA (A-I) : 65 - 73
+CONTIGUA 1 (J-P): 74 - 80
+CONTIGUA 2 (Q-Z): 81 - 90
+
+###### SECCION 0434
+
+BASICA : A-65 - I-73
+CONTIGUA 1: J-74 P-80
+CONTIGUA 2: Q-81 Z-90
+
+###### SECCION 0435
+
+BASICA : A-65 - I-73
+CONTIGUA 1: J-74 P-80
+CONTIGUA 2: Q-81 Z-90
