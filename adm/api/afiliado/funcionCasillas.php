@@ -54,7 +54,7 @@ function obtenerCasilla($seccion, $codigoApellido)
         '0433' => [
             ['casilla' => 'B', 'min' => 65, 'max' => 73],  // APELLIDOS DE LA LETRA A:65 - HASTA LA LETRA I:73
             ['casilla' => 'C1', 'min' => 74, 'max' => 80], // APELLIDOS DE LA LETRA J:74 - HASTA LA LETRA P:80
-            ['casilla' => 'C2', 'min' => 81, 'max' => 90]  // APELLIDOS DE LA LETRA Q:81 - HASTA LA LETRA Z:90
+            ['casilla' => 'C2', 'min' => 81, 'max' => 90]  // APELLIDOS DE LA LETRA Q:81 - HASTA LA LETRA Z:90 
         ],
 
         '0434' => [

@@ -1,15 +1,16 @@
 <?php
-  include '../api/session/check.php';
+include '../api/session/check.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="../../pubs/img/manage.png" type="image/png">
   <title>Gestión de Promotores</title>
-  
+
   <!-- Bootstrap 5.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
@@ -20,33 +21,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../pubs/estilo.css">
 </head>
+
 <body class="pb-5">
 
   <!-- Minimal Header con Menú de Navegación -->
   <header class="bg-white border-bottom py-2 py-md-3 mb-4 sticky-top shadow-sm">
     <div class="container-fluid px-3 px-md-4 d-flex align-items-center justify-content-between">
-      
+
       <!-- Extremo Izquierdo: Identidad / Logo -->
       <a href="./index.php" class="d-flex align-items-center gap-2 text-decoration-none">
         <div class="bg-dark text-white rounded-2 d-flex align-items-center justify-content-center shadow-sm" style="width: 36px; height: 36px; min-width: 36px;">
           <i class="bi bi-person-vcard fs-5"></i>
         </div>
         <div>
-          <span class="fw-bold text-dark fs-6 tracking-tight d-block lh-1">Gestión de Afiliados</span>
+          <span class="fw-bold text-dark fs-6 tracking-tight d-block lh-1">Promotores</span>
           <span class="text-muted" style="font-size: 0.75rem;">Alta de Promotores</span>
         </div>
       </a>
 
       <!-- Botón Hamburguesa / Menú -->
-      <button 
-        class="btn btn-light border-0 rounded-2 p-2 text-dark d-flex align-items-center justify-content-center" 
-        type="button" 
-        data-bs-toggle="offcanvas" 
-        data-bs-target="#navMenuOffcanvas" 
+      <button
+        class="btn btn-light border-0 rounded-2 p-2 text-dark d-flex align-items-center justify-content-center"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#navMenuOffcanvas"
         aria-controls="navMenuOffcanvas"
         aria-label="Abrir menú de navegación"
-        style="width: 38px; height: 38px;"
-      >
+        style="width: 38px; height: 38px;">
         <i class="bi bi-list fs-4 lh-1"></i>
       </button>
 
@@ -55,7 +56,7 @@
 
   <!-- Menú Lateral Deslizante (Offcanvas) -->
   <div class="offcanvas offcanvas-end border-0 shadow" tabindex="-1" id="navMenuOffcanvas" aria-labelledby="navMenuLabel" style="max-width: 300px;">
-    
+
     <!-- Encabezado del Menú -->
     <div class="offcanvas-header border-bottom py-3">
       <div class="d-flex align-items-center gap-2">
@@ -70,9 +71,9 @@
     <!-- Cuerpo con Enlaces -->
     <div class="offcanvas-body d-flex flex-column justify-content-between p-3">
       <div class="list-group list-group-flush border-0">
-        
+
         <!-- Opción: Captura de INE -->
-       <a href="../registro/" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
+        <a href="../registro/" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
           <i class="bi bi-camera-fill text-muted fs-5"></i>
           <div>
             <span class="d-block lh-1 text-dark fw-medium">Registro</span>
@@ -90,7 +91,7 @@
         </a>
 
         <!-- Opción: Mini Dashboard / Estadísticas -->
-        <a href="./dashboard.php" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
+        <a href="../dashboard/" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
           <i class="bi bi-bar-chart-line-fill text-muted fs-5"></i>
           <div>
             <span class="d-block lh-1 text-dark fw-medium">Dashboard</span>
@@ -152,21 +153,20 @@
 
       <form id="formPromotor" onsubmit="event.preventDefault(); handleSavePromotor();">
         <div class="row g-3">
-          
+
           <!-- Nombre(s) -->
           <div class="col-md-4">
             <label for="nombre" class="form-label-subtle">
               Nombre(s) <span class="text-danger">*</span>
             </label>
-            <input 
-              type="text" 
-              id="nombres" 
+            <input
+              type="text"
+              id="nombres"
               name="nombres"
-              class="form-control form-control-modern" 
-              placeholder="Ej. Carlos" 
+              class="form-control form-control-modern"
+              placeholder="Ej. Carlos"
               autocomplete="given-name"
-              required
-            >
+              required>
           </div>
 
           <!-- Apellido Paterno -->
@@ -174,15 +174,14 @@
             <label for="apellidoPaterno" class="form-label-subtle">
               Apellido Paterno <span class="text-danger">*</span>
             </label>
-            <input 
-              type="text" 
-              id="aPaterno" 
+            <input
+              type="text"
+              id="aPaterno"
               name="aPaterno"
-              class="form-control form-control-modern" 
-              placeholder="Ej. Mendoza" 
+              class="form-control form-control-modern"
+              placeholder="Ej. Mendoza"
               autocomplete="family-name"
-              required
-            >
+              required>
           </div>
 
           <!-- Apellido Materno -->
@@ -190,13 +189,12 @@
             <label for="apellidoMaterno" class="form-label-subtle">
               Apellido Materno
             </label>
-            <input 
-              type="text" 
-              id="aMaterno" 
+            <input
+              type="text"
+              id="aMaterno"
               name="aMaterno"
-              class="form-control form-control-modern" 
-              placeholder="Ej. López"
-            >
+              class="form-control form-control-modern"
+              placeholder="Ej. López">
           </div>
 
           <!-- Teléfono -->
@@ -208,17 +206,16 @@
               <span class="input-group-text bg-white border-end-0 text-muted" style="border-color: #dee2e6;">
                 <i class="bi bi-telephone"></i>
               </span>
-              <input 
-                type="tel" 
-                id="telefono" 
+              <input
+                type="tel"
+                id="telefono"
                 name="telefono"
-                class="form-control form-control-modern border-start-0 ps-1 font-monospace" 
-                placeholder="Ej. 9611234567" 
+                class="form-control form-control-modern border-start-0 ps-1 font-monospace"
+                placeholder="Ej. 9611234567"
                 inputmode="tel"
                 maxlength="10"
                 pattern="[0-9]{10}"
-                required
-              >
+                required>
             </div>
           </div>
 
@@ -229,7 +226,7 @@
           <button type="button" class="btn btn-outline-secondary rounded-2 btn-sm px-3" onclick="resetPromotorForm()">
             <i class="bi bi-arrow-counterclockwise me-1"></i> Limpiar
           </button>
-          
+
           <button type="submit" id="btnSavePromotor" class="btn btn-dark rounded-2 btn-sm px-4 py-2 d-flex align-items-center gap-2">
             <i class="bi bi-check2-circle"></i>
             <span id="btnSaveText">Guardar</span>
@@ -261,7 +258,7 @@
           </thead>
           <tbody id="tablaPromotores">
             <!-- Ejemplo estático inicial / se poblará dinámicamente -->
-            <tr>              
+            <tr>
             </tr>
           </tbody>
         </table>
@@ -270,7 +267,7 @@
 
     <!-- Footer -->
     <footer class="text-center text-muted small mt-5 pt-3">
-      Gestion de Afiliados - @ever2812      
+      Gestion de Afiliados - @ever2812
     </footer>
   </main>
 
@@ -280,4 +277,5 @@
   <script src="../js/createPromotor.js"></script>
 
 </body>
+
 </html>

@@ -35,7 +35,7 @@ include '../api/session/check.php';
           <i class="bi bi-person-vcard fs-5"></i>
         </div>
         <div>
-          <span class="fw-bold text-dark fs-6 tracking-tight d-block lh-1">Gestión de Afiliados</span>
+          <span class="fw-bold text-dark fs-6 tracking-tight d-block lh-1">Registro</span>
           <span class="text-muted" style="font-size: 0.75rem;">Extraer datos de INE</span>
         </div>
       </a>
@@ -92,7 +92,7 @@ include '../api/session/check.php';
         </a>
 
         <!-- Opción: Mini Dashboard / Estadísticas -->
-        <a href="./dashboard.php" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
+        <a href="../dashboard/" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 px-3 rounded-3 mb-1 border-0 text-secondary">
           <i class="bi bi-bar-chart-line-fill text-muted fs-5"></i>
           <div>
             <span class="d-block lh-1 text-dark fw-medium">Dashboard</span>
