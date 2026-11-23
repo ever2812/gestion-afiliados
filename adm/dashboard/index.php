@@ -183,10 +183,10 @@ if (!isset($_SESSION['idUsuario'])) {
 
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-4">
             <div>
-                <h1 class="h4 fw-bold text-dark mb-1">Dashboard de afiliados</h1>
-                <p class="text-muted small mb-0">
+                <h1 class="h4 fw-bold text-dark mb-1">Avance de Capturas</h1>
+                <!-- <p class="text-muted small mb-0">
                     Resumen general de las capturas realizadas
-                </p>
+                </p> -->
             </div>
             <button class="btn btn-outline-secondary btn-sm rounded-3"
                 id="btnActualizar">
@@ -203,9 +203,9 @@ if (!isset($_SESSION['idUsuario'])) {
                 <div class="metric-card p-3 shadow-sm">
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
-                            <div class="text-muted small fw-medium mb-2">Total de afiliados</div>
+                            <div class="text-muted small fw-medium mb-2">Total de Afiliados</div>
                             <div class="metric-number text-dark" id="totalAfiliados">0</div>
-                            <div class="text-muted small mt-1">Registros activos</div>
+                            <div class="text-muted small mt-1">Registros Activos</div>
                         </div>
                         <div class="metric-icon bg-primary-subtle text-primary">
                             <i class="bi bi-people-fill"></i>
@@ -235,7 +235,7 @@ if (!isset($_SESSION['idUsuario'])) {
                         <div>
                             <div class="text-muted small fw-medium mb-2">Casillas con registros</div>
                             <div class="metric-number text-dark" id="totalCasillas">0</div>
-                            <div class="text-muted small mt-1">Combinaciones sección/casilla</div>
+                            <div class="text-muted small mt-1">Combinaciones Sección/Casilla</div>
                         </div>
                         <div class="metric-icon bg-warning-subtle text-warning">
                             <i class="bi bi-pin-map-fill"></i>
@@ -253,8 +253,8 @@ if (!isset($_SESSION['idUsuario'])) {
                     <i class="bi bi-bar-chart-fill"></i>
                 </div>
                 <div>
-                    <h2 class="h6 fw-bold mb-0">Afiliados por sección electoral</h2>
-                    <small class="text-muted">Distribución de registros por sección</small>
+                    <h2 class="h6 fw-bold mb-0">Distribución por Secciones</h2>
+                    <!-- <small class="text-muted">Distribución de registros por sección</small> -->
                 </div>
             </div>
 
@@ -266,8 +266,8 @@ if (!isset($_SESSION['idUsuario'])) {
         <!-- Resumen por casilla -->
         <section class="card card-modern p-3 p-md-4 mb-4">
             <div class="mb-3">
-                <h2 class="h6 fw-bold mb-1">Afiliados por casilla</h2>
-                <small class="text-muted">Distribución de afiliados por sección y tipo de casilla</small>
+                <h2 class="h6 fw-bold mb-1">Distribución por Casilllas</h2>
+                <!-- <small class="text-muted">Distribución de afiliados por sección y tipo de casilla</small> -->
             </div>
 
             <div class="row g-3" id="resumenCasillas">
@@ -279,10 +279,10 @@ if (!isset($_SESSION['idUsuario'])) {
         <section class="card card-modern p-3 p-md-4">
             <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
                 <div>
-                    <h2 class="h6 fw-bold mb-1">Listado de afiliados</h2>
-                    <small class="text-muted">
+                    <h2 class="h6 fw-bold mb-1">Listado Completo</h2>
+                    <!-- <small class="text-muted">
                         Consulta y búsqueda de los registros capturados
-                    </small>
+                    </small> -->
                 </div>
 
                 <div class="input-group input-group-sm search-box">
