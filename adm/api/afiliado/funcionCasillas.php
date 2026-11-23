@@ -1,19 +1,39 @@
 <?php
-function obtenerCodigoApellido($apellidoPaterno) {
+function obtenerCodigoApellido($apellidoPaterno)
+{
     $apellidoPaterno = mb_strtoupper(trim($apellidoPaterno), 'UTF-8');
 
     // Obtener la primera letra
     $primeraLetra = mb_substr($apellidoPaterno, 0, 1, 'UTF-8');
 
-    // Arreglo de equivalencias
+    // Arreglo de equivalencias de la primera letra del apellido
     $codigos = [
-        'A' => 65, 'B' => 66, 'C' => 67, 'D' => 68,
-        'E' => 69, 'F' => 70, 'G' => 71, 'H' => 72,
-        'I' => 73, 'J' => 74, 'K' => 75, 'L' => 76,
-        'M' => 77, 'N' => 78, 'O' => 79, 'P' => 80,
-        'Q' => 81, 'R' => 82, 'S' => 83, 'T' => 84,
-        'U' => 85, 'V' => 86, 'W' => 87, 'X' => 88,
-        'Y' => 89, 'Z' => 90
+        'A' => 65,
+        'B' => 66,
+        'C' => 67,
+        'D' => 68,
+        'E' => 69,
+        'F' => 70,
+        'G' => 71,
+        'H' => 72,
+        'I' => 73,
+        'J' => 74,
+        'K' => 75,
+        'L' => 76,
+        'M' => 77,
+        'N' => 78,
+        'O' => 79,
+        'P' => 80,
+        'Q' => 81,
+        'R' => 82,
+        'S' => 83,
+        'T' => 84,
+        'U' => 85,
+        'V' => 86,
+        'W' => 87,
+        'X' => 88,
+        'Y' => 89,
+        'Z' => 90
     ];
 
     return $codigos[$primeraLetra] ?? null;
@@ -27,7 +47,8 @@ function obtenerCodigoApellido($apellidoPaterno) {
 // S: 83 | T: 84 | U: 85 | V: 86 | W: 87 | X: 88
 // Y: 89 | Z: 90
 
-function obtenerCasilla($seccion, $codigoApellido) {
+function obtenerCasilla($seccion, $codigoApellido)
+{
 
     $matriz = [
         '0433' => [
